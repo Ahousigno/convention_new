@@ -18,7 +18,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Edition de la Demande</h3>
                     </div>
-                    <form action="{{ $add_update }}" id="demand_attent_form" style="font-size:13px" method="POST"
+                    <form action="{{route('add_update') }}" id="demand_attent_form" style="font-size:13px" method="POST"
                         accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
@@ -140,6 +140,7 @@
 
                         <input type="hidden" name="id" value="{{ $demande_attente->id}}">
                         @include("admin.partenariat.link_drive_modal")
+
                         <div class="card-footer">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#linkDriveModal"
                                 data-whatever="@mdo">Enregister</button>

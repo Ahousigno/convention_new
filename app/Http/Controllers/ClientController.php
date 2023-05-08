@@ -51,7 +51,7 @@ class ClientController extends Controller
             'logo' => ['nullable'],
             'situation_geo' => ['required'],
             'motif' => ['required'],
-            'exemple_convention' => ['required'],
+            'exemple_convention' => ['nullable'],
         ]);
         $partenariat = new Demandepartenariat();
         $partenariat->nom = $request->nom;
@@ -79,7 +79,7 @@ class ClientController extends Controller
             ])->validate();
             $exemple_convention = $request->exemple_convention;
             $piece_name = '/source_recru/exemple_convention/exemple_convention_' . $exemple_convention->getClientOriginalExtension();
-            $exemple_convention->move('source_recru/logo/', $piece_name);
+            $exemple_convention->move('source_recru/exemple_convention/', $piece_name);
             $partenariat['exemple_convention'] = $piece_name;
         }
         // if ($request->photo) {

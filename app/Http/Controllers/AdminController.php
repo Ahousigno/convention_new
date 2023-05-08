@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Laracasts\Flash\Flash;
 use App\Models\Demandepartenariat;
+use Exception;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -28,39 +31,143 @@ class AdminController extends Controller
         // return view('admin.partenariat.demande_attente')->with($data);
     }
 
-    public function edit_attente($id = null)
+    public function edit_attente($id)
     {
-        if ($id != null) {
-            $data['demande_attente'] = DemandePartenariat::find($id);
-            // $data['add_update'] = route('admin.demande_attentes_update', $id);
-        }
-        return view('admin.partenariat.edit_demande')->with($data);
+        $demande_attente = DemandePartenariat::find($id);
+        return view('admin.partenariat.edit_demande', compact('demande_attente'));
     }
 
-    //     public function be_partener(Request $request)
-    //   {
-    //     $this->validate(
-    //       $request,
-    //       [
-    //         'be_partener' => 'required',
-    //       ]
-    //     );
-    //     $attribute = [
-    //       'be_partener' => trim($request->be_partener),
-    //     ];
-    //     DB::beginTransaction();
-    //     try {
-    //       $a = Partenaire::find($request->partenaire_id);
-    //       $b = $a->update($attribute);
-    //       DB::commit();
-    //       flash('Opération effectuée avec succès !')->success();
-    //       return redirect()->route('admin.partenaires');
-    //     } catch (Exception $exception) {
-    //       DB::rollBack();
-    //       flash($exception->getMessage())->error();
-    //       return redirect()->route('admin.partenaires');
-    //     }
+    public function be_partener(Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'be_partener' => 'required',
+            ]
+        );
+        $attribute = [
+            'be_partener' => trim($request->be_partener),
+        ];
+        DB::beginTransaction();
+        try {
+            $a = Demandepartenariat::find($request->partenaire_id);
+            $b = $a->update($attribute);
+            DB::commit();
+            //   flash('Opération effectuée avec succès !')->success();
+            return redirect()->route('admin.partenaires');
+        } catch (Exception $exception) {
+            DB::rollBack();
+            // flash($exception->getMessage())->error();
+            return redirect()->route('admin.partenariat.edit_demande');
+        }
+    }
 
+    public function edit_update(Request $request)
+    {
+        //     @if($request->can_be_partner != null  && == 'NON');
+
+        //     @else($request->can_be_partner != null  && == 'OUI')
+
+        // @endif
+        $request->validate([
+            'nom' => ['required'],
+            'prenoms' => ['required'],
+            'email' => ['required'],
+            'contact_tel' => ['required'],
+            'libelle_structure' => ['required'],
+            'logo' => ['nullable'],
+            'situation_geo' => ['required'],
+            'motif' => ['required'],
+            'exemple_convention' => ['required'],
+        ]);
+        $partenariat = new Demandepartenariat();
+        $partenariat->nom = $request->nom;
+        $partenariat->email = $request->email;
+        $partenariat->prenoms = $request->prenoms;
+        $partenariat->contact_tel = $request->contact_tel;
+        $partenariat->motif = $request->motif;
+        $partenariat->situation_geo = $request->situation_geo;
+        $partenariat->libelle_structure = $request->libelle_structure;
+
+        if ($request->hasFile('logo')) {
+            $validator = Validator::make($request->all(), [
+                'logo' => 'required|max:2000',
+            ])->validate();
+            $logo = $request->logo;
+            $piece_name = '/source_recru/logo/logo_' . $logo->getClientOriginalExtension();
+            $logo->move('source_recru/logo/', $piece_name);
+            $partenariat['logo'] = $piece_name;
+        }
+
+        if ($request->hasFile('exemple_convention')) {
+            $validator = Validator::make($request->all(), [
+                'exemple_convention' => 'required|max:5000',
+            ])->validate();
+            $exemple_convention = $request->exemple_convention;
+            $piece_name = '/source_recru/exemple_convention/exemple_convention_' . $exemple_convention->getClientOriginalExtension();
+            $exemple_convention->move('source_recru/logo/', $piece_name);
+            $partenariat['exemple_convention'] = $piece_name;
+        }
+
+        $partenariat->save();
+
+        return view('admin.partenariat.edit_demande')->with("success", "demande soumise avec succès!");
+    }
+
+
+    public function motif_modal(Request $request)
+    {
+        $this->validate($request, [
+            'motif_rejet' => ['required', 'max:600']
+        ]);
+        $demande_attente = Demandepartenariat::first();
+        $demande_attente->can_be_partner == 'NON';
+        $demande_attente->motif_rejet = $request->motif_rejet;
+        $demande_attente->update();
+        // Alert::success('Succès', 'L\'évènement a bien été réfusé !');
+        // $recipient = ['secretariat@uvci.edu.ci', 'georgette.assemian@uvci.edu.ci', 'medias@uvci.edu.ci', 'signo.aviet@uvci.edu.ci', 'patrimoine@uvci.edu.ci', 'dg@uvci.edu.ci',  $event->user->email]; //Emails des destinataires
+        // $mail_data = [
+        //     'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+        //     'fromEmail' => Auth::user()['email'],
+        //     'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
+        //     "subject" => "Validation des évènements",
+        //     "motifRejet" => $request->motif,
+        //     "event_name" => $event->nom,
+        // ];
+        // Mail::send('admin.subdirector.emails.rejectEvent', $mail_data, function ($message) use ($mail_data) {
+        //     $message->to($mail_data['recipient'])
+        //         ->from($mail_data['fromEmail'], $mail_data['fromName'])
+        //         ->subject($mail_data['subject']);
+        // });
+        return back()->with("success",  "Demande rejetée!");
+    }
+
+    public function drive_modal(Request $request)
+    {
+        $this->validate($request, [
+            'drive' => ['required', 'max:600']
+        ]);
+        $demande_attente = Demandepartenariat::first();
+        $demande_attente->can_be_partner == 'OUI';
+        $demande_attente->drive = $request->linkDriveModal;
+        $demande_attente->update();
+        // Alert::success('Succès', 'L\'évènement a bien été réfusé !');
+        // $recipient = ['secretariat@uvci.edu.ci', 'georgette.assemian@uvci.edu.ci', 'medias@uvci.edu.ci', 'signo.aviet@uvci.edu.ci', 'patrimoine@uvci.edu.ci', 'dg@uvci.edu.ci',  $event->user->email]; //Emails des destinataires
+        // $mail_data = [
+        //     'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+        //     'fromEmail' => Auth::user()['email'],
+        //     'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
+        //     "subject" => "Validation des évènements",
+        //     "motifRejet" => $request->motif,
+        //     "event_name" => $event->nom,
+        // ];
+        // Mail::send('admin.subdirector.emails.rejectEvent', $mail_data, function ($message) use ($mail_data) {
+        //     $message->to($mail_data['recipient'])
+        //         ->from($mail_data['fromEmail'], $mail_data['fromName'])
+        //         ->subject($mail_data['subject']);
+        // });
+        return back()->with("success",  "Demande acceptée!");
+    }
 
     // public function demande_attentes_save(Request $request)
     // {

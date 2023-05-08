@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//partie client
 Route::get('/', function () {
     return view('client.accueil');
 });
@@ -24,14 +24,18 @@ Route::get('/partenariat', [ClientController::class, 'demande_partenariat'])->na
 Route::post('/partenariat/store', [ClientController::class, 'store'])->name('partenariat.store');
 Route::get('/mediatheque', [ClientController::class, 'mediatheque'])->name('client.mediatheque');
 Route::get('/convention', [ClientController::class, 'demande_convention'])->name('client.convention');
-
+//partie admin
 Route::get('/admin', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('admin.dashboard');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('admin/attente', [AdminController::class, 'demande_attente'])->name('admin.partenariat.demande_attente');
 Route::get('edit/attente/{id}', [AdminController::class, 'edit_attente'])->name('admin.partenariat.edit_demande');
-Route::post('edit/update/{id}', [AdminController::class, 'edit_update'])->name('add_update');
+Route::post('edit/update', [AdminController::class, 'edit_update'])->name('add_update');
 Route::get('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
+
+Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('admin.partenariat.link_drive_modal');
+
+Route::post('modal/drive', [AdminController::class, 'motif_modal'])->name('admin.partenariat.link_motif_modal');
 
 require __DIR__ . '/auth.php';
