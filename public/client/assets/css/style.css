@@ -26,17 +26,17 @@ STYLE POUR LA PAGE D'ACCUEIL
     color: rgb(18, 166, 80);
     font-size: 17px;
 }
-.banner .text {
+/* .banner .text {
     color: #ffffff;
     line-height: 1.2em;
-    font-weight: bold;
+    font-weight: bold; */
     /**letter-spacing: 3px;*/
-    vertical-align: middle;
+    /* vertical-align: middle;
     margin-top: 100px;
     text-align: center;
     font-family: 'Livvic', sans-serif;
-}
-.banner .text2{
+} */
+/* .banner .text2{
     position: absolute;
     bottom: 35%;
     left: 50%;
@@ -59,10 +59,10 @@ STYLE POUR LA PAGE D'ACCUEIL
     100% {
         color: white;
     }
-}
+} */
 .banner {
     height: 400px;
-    background-image: url("/client/assets/img/.jpg");
+    background-image: url("/client/assets/img/banner_convention.gif");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -70,7 +70,7 @@ STYLE POUR LA PAGE D'ACCUEIL
 }
 .overlay {
     background-color: rgba(0, 0, 0, 0.55);
-    height: 520px;
+    height: 400px;
     display: table;
     color: white;
 }

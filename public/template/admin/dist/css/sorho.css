@@ -1,0 +1,37 @@
+.background-color-uvci {
+  background-color: #951b81;
+}
+
+.login-page-uvci,
+.register-page-uvci {
+  -ms-flex-align: center;
+  align-items: center;
+  background: #951b81;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.btn-uvci-connexion {
+  color: #fff;
+  background-color: #951b81;
+  border-color: #0062cc;
+}
+
+.btn-uvci-connexion:hover {
+  color: white;
+}
+
+.link-uvci {
+  text-decoration: none;
+  color: #951b81;
+}
+
+.link-uvci:hover {
+  text-decoration: none;
+  color: #139c40;
+}

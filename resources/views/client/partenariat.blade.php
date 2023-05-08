@@ -12,7 +12,7 @@
 <section class="popular-packages">
     <div class="container">
         <section class="login">
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="{{route('partenariat.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="panel" style="box-shadow: inset
                 0 0 0.7em blue;">
@@ -44,6 +44,7 @@
                         </div>
 
                         <div align="center" class="form-group col-xs-4">
+
                             <label>E-mail</label>
                             <input type="email" name="email" required class="form-control">
                         </div>

@@ -58,33 +58,35 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "before-event") : ?>active<?php endif; ?>"
+                                <a class="nav-link <?php if ($nav == "presentation") : ?>active<?php endif; ?>"
                                     href="{{route('client.presentation')}}" id="nav-link">
                                     <i class="fa fa-send" aria-hidden="true"></i> Présentation
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "archive") : ?>active<?php endif; ?>"
+                                <a class="nav-link <?php if ($nav == "partenariat") : ?>active<?php endif; ?>"
                                     href="{{route('client.partenariat')}}" id="nav-link">
                                     <i class="fa fa-archive" aria-hidden="true"></i> Partenariat
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "archive") : ?>active<?php endif; ?>"
+                                <a class="nav-link <?php if ($nav == "mediatheque") : ?>active<?php endif; ?>"
                                     href="{{route('client.mediatheque')}}" id="nav-link">
                                     <i class="fa fa-archive" aria-hidden="true"></i> Médiathèque
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "archive") : ?>active<?php endif; ?>"
+                                <a class="nav-link <?php if ($nav == "convention") : ?>active<?php endif; ?>"
                                     href="{{route('client.convention')}}" id="nav-link">
                                     <i class="fa fa-archive" aria-hidden="true"></i> Convention
                                 </a>
                             </li>
+                        </ul>
+                        <ul class="navbar-nav">
                             @if (Auth::user())
 
-                            <li class=nav-item <?php if ($nav ?? "") : ?>active<?php endif; ?>">
-                                <span class="dropdown-toggle text-decoration-none" href="#" role="button"
+                            <li class="nav-item">
+                                <span class=" dropdown-toggle text-decoration-none" href="#" role="button"
                                     data-bs-toggle="dropdown">
                                     <a><i class="fa fa-user"></i>
                                         {{Auth::user()['name']}}
@@ -111,12 +113,13 @@
                             </li>
 
                             @else
-                            <li class="nav-item <?php if ($nav ?? "login") : ?>active<?php endif; ?>">
-                                <a class="nav-link" href="#" id="nav-link"><i class="fa fa-user" aria-hidden="true"></i>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('login')}}" id="nav-link"><i class="fa fa-user"
+                                        aria-hidden="true"></i>
                                     Connecter</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" id="nav-link">
+                                <a class="nav-link" href="{{route('register')}}" id="nav-link">
                                     </i> S'inscrire
                                 </a>
                             </li>

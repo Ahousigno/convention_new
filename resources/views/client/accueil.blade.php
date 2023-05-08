@@ -1,9 +1,9 @@
 @extends("layouts.client_layout")
 
 @section("contenu")
-<?php $nav = "home" ?>
+<?php $nav = "accueil" ?>
 <div class="content bg-light">
-    <div style="background-image: url({{asset('/client/assets/img/banner_partenariat.jpg')}});" class="banner">
+    <div style="background-image: url({{asset('/client/assets/img/banner_convention.gif')}});" class="banner">
         <div class="overlay container-fluid mt-2">
             <h2 class="text">
             </h2>
@@ -18,7 +18,7 @@
 
         <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
 
-            <a href="{{route('client.partenariat')}}">
+            <a href="#">
                 <div class="box">
                     <div class="our-services privacy">
                         <div class="icon">
@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-            <a href="{{route('client.convention')}}">
+            <a href="#">
                 <div class="box">
                     <div class="our-services privacy">
                         <div class="icon">
@@ -48,7 +48,7 @@
 
         <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
 
-            <a href="{{route('client.partenariat')}}">
+            <a href="#">
                 <div class="box">
                     <div class="our-services privacy">
                         <div class="icon">
@@ -63,7 +63,7 @@
 
         <div class="col-lg-3 col-md-3 col-sm-6">
 
-            <a href="{{route('client.convention')}}">
+            <a href="#">
                 <div class="box">
                     <div class="our-services privacy">
                         <div class="icon">
