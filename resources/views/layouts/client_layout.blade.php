@@ -239,6 +239,45 @@
         type="text/javascript"></script>--}}
 
     {{--@include('sweetalert::alert')--}}
+
+    </script>
+
+    <script type="text/javascript">
+        $(".select2").select2({
+            dropdownParent: $("#exampleModal")
+        });
+    </script>
+
+
+    <!-- JQUERY ALERTE -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php if (session('error')) : ?>
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Oups !',
+            text: '<?php echo session('error'); ?>',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2500
+            // confirmButtonText: 'Retour'
+        })
+    </script>
+    <?php endif; ?>
+
+    <?php if (session('success') || !empty($success)) : ?>
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Succès !',
+            text: '<?php echo session('success') ?? $success; ?>',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 4000
+            // confirmButtonText: 'Retour'
+        })
+    </script>
+    <?php endif; ?>
+
 </body>
 
 <style>

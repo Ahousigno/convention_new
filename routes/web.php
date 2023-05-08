@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ConventionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,10 @@ Route::post('edit/update/{id}', [AdminController::class, 'edit_update'])->name('
 Route::get('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
 
 require __DIR__ . '/auth.php';
+
+
+#Convention
+Route::post('/save_demande_conventions', [ConventionController::class, 'save_demande_convention'])->name('save_demande_convention');
+Route::post('conventions/{id}/valider', [ConventionController::class, 'valider'])->name('conventions.valider');
+Route::post('conventions{id}/refuser', [ConventionController::class, 'refuser'])->name('conventions.refuser');
+Route::get('/demande_convention', [ConventionController::class, 'show_demande_convention'])->name('show_demande_convention');
