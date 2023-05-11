@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ConventionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,3 +40,11 @@ Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('admin
 Route::post('modal/drive', [AdminController::class, 'motif_modal'])->name('admin.partenariat.link_motif_modal');
 
 require __DIR__ . '/auth.php';
+
+
+
+#Convention
+Route::post('/save_demande_conventions', [ConventionController::class, 'save_demande_convention'])->name('save_demande_convention');
+Route::post('conventions/{id}/valider', [ConventionController::class, 'valider'])->name('conventions.valider');
+Route::post('conventions{id}/refuser', [ConventionController::class, 'refuser'])->name('conventions.refuser');
+Route::get('/demande_convention', [ConventionController::class, 'show_demande_convention'])->name('show_demande_convention');

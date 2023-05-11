@@ -121,7 +121,7 @@
                             </a></li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('show_demande_convention')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-hashtag"></i>
                                 <p>Convention</p>
                             </a>
