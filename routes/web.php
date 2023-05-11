@@ -48,3 +48,6 @@ Route::post('/save_demande_conventions', [ConventionController::class, 'save_dem
 Route::post('conventions/{id}/valider', [ConventionController::class, 'valider'])->name('conventions.valider');
 Route::post('conventions{id}/refuser', [ConventionController::class, 'refuser'])->name('conventions.refuser');
 Route::get('/demande_convention', [ConventionController::class, 'show_demande_convention'])->name('show_demande_convention');
+
+#validation
+Route::get('/validation', [AdminController::class, 'validation_encours'])->name('admin.validation.encours');

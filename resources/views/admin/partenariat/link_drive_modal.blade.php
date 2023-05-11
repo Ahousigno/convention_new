@@ -9,7 +9,7 @@
 </div>
 
 <script>
-let form = document.querySelector("#demand_attent_form");
+let form = document.querySelector("#edit_demande");
 form.addEventListener("submit", function(e) {
     e.preventDefault();
     if (e.target.can_be_partner.value == 'OUI') {
@@ -23,7 +23,7 @@ form.addEventListener("submit", function(e) {
                               <input type="text" name="linkDriveModal" class="form-control" placeholder="https://docs.google.com/document/d/1JWm..">
                           </div>
                       <button  class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                      <button type="submit" onclick="document.querySelector('#demand_attent_form').submit()" class="btn btn-primary">envoyer</button>
+                      <button type="submit" onclick="document.querySelector('#edit_demande').submit()" class="btn btn-primary">envoyer</button>
                     </div>
                 </form>
             `
@@ -38,7 +38,7 @@ form.addEventListener("submit", function(e) {
                               <input type="text" name="motif_rejet" placeholder="ici le motif de rejet" class="form-control">
                           </div>
                       <button  class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                      <button type="submit" onclick="document.querySelector('#demand_attent_form').submit()" class="btn btn-primary">envoyer</button>
+                      <button type="submit" onclick="document.querySelector('#edit_demande').submit()" class="btn btn-primary">envoyer</button>
                     </div>
                 </form>   
             `

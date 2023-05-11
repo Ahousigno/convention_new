@@ -13,7 +13,7 @@ class AddDriveToDemandepartenariats extends Migration
      */
     public function up()
     {
-        Schema::table('demandepartenariat', function (Blueprint $table) {
+        Schema::table('demandepartenariats', function (Blueprint $table) {
             $table->string('drive', 191)->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddDriveToDemandepartenariats extends Migration
      */
     public function down()
     {
-        Schema::table('demandepartenariat', function (Blueprint $table) {
+        Schema::table('demandepartenariats', function (Blueprint $table) {
             //
         });
     }
