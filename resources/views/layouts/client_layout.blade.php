@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}" />
     <meta name="theme-color" content="#7952b3">
     <link rel="stylesheet" href="{{asset('client/assets/css/style.css')}}">
-
+    @yield('section_css')
     <!-- the fileinput plugin styling CSS file -->
     {{-- <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/css/fileinput.min.css" media="all"
         rel="stylesheet" type="text/css" />
