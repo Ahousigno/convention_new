@@ -49,7 +49,7 @@
                     </form>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block"><a style="color:#fff" class="nav-link"> |
-                        {{ Auth::user()->nom }}</a></li>
+                        {{ Auth::user()->name }}</a></li>
                 <li class="nav-item d-none d-sm-inline-block"><a style="color:#fff" class="nav-link"> |
                         {{ Auth::user()->email }}</a></li>
             </ul>

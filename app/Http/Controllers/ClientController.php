@@ -51,7 +51,8 @@ class ClientController extends Controller
             'logo' => ['nullable'],
             'situation_geo' => ['required'],
             'motif' => ['required'],
-            'exemple_convention' => ['required'],
+            'exemple_convention' => 'nullable',
+
         ]);
         $partenariat = new Demandepartenariat();
         $partenariat->nom = $request->nom;
@@ -62,31 +63,31 @@ class ClientController extends Controller
         $partenariat->situation_geo = $request->situation_geo;
         $partenariat->libelle_structure = $request->libelle_structure;
 
-        // $partenariat = $request->all();
-        if ($request->hasFile('logo')) {
-            $validator = Validator::make($request->all(), [
-                'logo' => 'required|max:2000',
-            ])->validate();
-            $logo = $request->logo;
-            $piece_name = '/source_recru/logo/logo_' . $logo->getClientOriginalExtension();
-            $logo->move('source_recru/logo/', $piece_name);
-            $partenariat['logo'] = $piece_name;
+        if ($request->logo) {
+            $doc_lm = $request->logo;
+            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+            $partenariat->logo = $lm_name;
         }
 
-        if ($request->hasFile('exemple_convention')) {
-            $validator = Validator::make($request->all(), [
-                'exemple_convention' => 'required|max:5000',
-            ])->validate();
-            $exemple_convention = $request->exemple_convention;
-            $piece_name = '/source_recru/exemple_convention/exemple_convention_' . $exemple_convention->getClientOriginalExtension();
-            $exemple_convention->move('source_recru/logo/', $piece_name);
-            $partenariat['exemple_convention'] = $piece_name;
+        if ($request->exemple_convention) {
+            $doc_lm = $request->exemple_convention;
+            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+            $partenariat->exemple_convention = $lm_name;
         }
-        // if ($request->photo) {
-        //     $doc_lm = $request->photo;
+        // if ($request->hasFile('exemple_convention')) {
+        //     $validator = Validator::make($request->all(), [])->validate();
+        //     $exemple_convention = $request->exemple_convention;
+        //     $piece_name = '/source_recru/exemple_convention/exemple_convention_' . $exemple_convention->getClientOriginalExtension();
+        //     $exemple_convention->move('source_recru/exemple_convention/', $piece_name);
+        //     $partenariat['exemple_convention'] = $piece_name;
+        // }
+        // if ($request->logo) {
+        //     $doc_lm = $request->logo;
         //     $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
         //     $doc_lm->move(public_path("docs/images/lms"), $lm_name);
-        //     $user->photo = $lm_name;
+        //     $user->logo = $lm_name;
 
         $partenariat->save();
         // Alert::success('succes', "nouvel agent ajouté!");
