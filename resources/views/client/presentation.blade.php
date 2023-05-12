@@ -92,7 +92,6 @@
         a:hover{
             text-decoration: none;
             color: white;
-            background-color: #92278f;
         }
 
     </style>
