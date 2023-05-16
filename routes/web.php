@@ -35,9 +35,9 @@ Route::get('edit/attente/{id}', [AdminController::class, 'edit_attente'])->name(
 Route::post('edit/update', [AdminController::class, 'edit_update'])->name('add_update');
 Route::get('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
 
-Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('admin.partenariat.link_drive_modal');
+Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('link_drive_content');
 
-Route::post('modal/drive', [AdminController::class, 'motif_modal'])->name('admin.partenariat.link_motif_modal');
+Route::post('modal/motif', [AdminController::class, 'motif_modal'])->name('motif_content');
 
 require __DIR__ . '/auth.php';
 
