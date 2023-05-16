@@ -93,7 +93,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.validation.encours')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
                                 <p>Validation en cours..</p>
                             </a>
@@ -111,8 +111,8 @@
                                 <p>Categories</p>
                             </a>
                         </li>
-                        <li class="nav-item"><a href="#" class="nav-link"><i style="font-size:13px"
-                                    class="fa fa-users nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('admin.validation.partenaire')}}" class="nav-link"><i
+                                    style="font-size:13px" class="fa fa-users nav-icon"></i>
                                 <p>Partenaires</p>
                             </a></li>
                         <li class="nav-item"><a href="#" class="nav-link"><i style="font-size:13px"

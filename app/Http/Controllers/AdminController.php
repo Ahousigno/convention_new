@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Laracasts\Flash\Flash;
 use App\Models\Demandepartenariat;
+use App\Models\Validation;
 use Exception;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -136,8 +137,59 @@ class AdminController extends Controller
         ]);
         $partenariat = Demandepartenariat::first();
         $partenariat->can_be_partner == 'OUI';
-        $partenariat->drive = $request->linkDriveModal;
-        $partenariat->save();
-        return view('client.partenariat.edit_demande')->with("success", "demande acceptée!");
+        $partenariat->drive = $request->drive;
+        $partenariat->update();
+        return view('admin.validation.encours')->with("success", "demande acceptée!");
+    }
+    //partie validation
+    public function validation_encours()
+    {
+        $partenaires = DB::table('demandepartenariats')->select('*')
+            ->where('can_be_partner', 'OUI')
+            ->where('drive', '!=', null)
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
+        return view('admin.validation.encours', compact('partenaires'));
+    }
+
+    public function validation_store(Request $request)
+    {
+
+        $request->validate([
+            'nom_convention' => ['required'],
+            // 'categorie_id' => 'required',
+            'date_debut' => ['required'],
+            'date_fin' => ['required'],
+            'file_convention' => ['required'],
+            'image_convention' => ['required'],
+        ]);
+        $partenaire = new Validation();
+        $partenaire->nom_convention = $request->nom_convention;
+        $partenaire->date_debut = $request->date_debut;
+        $partenaire->date_fin = $request->date_fin;
+        if ($request->file_convention) {
+            $doc_lm = $request->file_convention;
+            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+            $partenaire->file_convention = $lm_name;
+        }
+
+        if ($request->image_convention) {
+            $doc_lm = $request->image_convention;
+            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+            $partenaire->image_convention = $lm_name;
+        }
+        $partenaire->save();
+        return redirect()->route("admin.validation.partenaire")->with("partenariat confirmé!");
+    }
+
+    public function partenaire()
+    {
+        $validations = DB::table('validations')->select('*')
+            ->where('validated', '1')
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
+        return view('admin.validation.partenaire', compact('validations'));
     }
 }

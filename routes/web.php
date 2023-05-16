@@ -37,9 +37,9 @@ Route::get('edit/attente/{id}', [AdminController::class, 'edit_attente'])->name(
 Route::post('edit/update', [AdminController::class, 'edit_update'])->name('add_update');
 Route::get('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
 
-Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('link_drive_content');
+Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('lien_drive');
 
-Route::post('modal/motif', [AdminController::class, 'motif_modal'])->name('motif_content');
+Route::post('modal/motif', [AdminController::class, 'motif_modal'])->name('motif_rejet');
 
 require __DIR__ . '/auth.php';
 
@@ -53,3 +53,7 @@ Route::get('/demande_convention', [ConventionController::class, 'show_demande_co
 
 #validation
 Route::get('/validation', [AdminController::class, 'validation_encours'])->name('admin.validation.encours');
+Route::post('/validation', [AdminController::class, 'validation_store'])->name('validation_partner');
+//partie partenaire
+
+Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.validation.partenaire');
