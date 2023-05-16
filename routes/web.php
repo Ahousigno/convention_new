@@ -25,6 +25,8 @@ Route::get('/partenariat', [ClientController::class, 'demande_partenariat'])->na
 Route::post('/partenariat/store', [ClientController::class, 'store'])->name('partenariat.store');
 Route::get('/mediatheque', [ClientController::class, 'mediatheque'])->name('client.mediatheque');
 Route::get('/convention', [ClientController::class, 'demande_convention'])->name('client.convention');
+Route::get('/tous-les-partenaires', [ClientController::class, 'all_partenariats'])->name('all_partenariats');
+
 //partie admin
 Route::get('/admin', function () {
     return view('admin.dashboard');

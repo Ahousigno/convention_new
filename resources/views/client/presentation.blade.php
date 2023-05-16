@@ -1,204 +1,98 @@
 @extends('layouts.client_layout')
+@section('section_css')
+    <link rel="stylesheet" href="{{asset('client/assets/css/presentation.css')}}">
+@endsection
 @section('contenu')
 <!-- Banner start -->
 
-@if (session('status'))
-<div align='center' class="alert alert-success">
-    {{ session('status') }}
-</div>
-@endif
-
 <?php $nav = "presentation" ?>
 <!-- Destinations -->
-<section class="destinations">
-    <div class="container" style="box-shadow: inset
-                0 0 0.5em blue;">
-        <div class="row">
-            <div class="col-lg-offset-2" style="margin-bottom: 70px" ;>
-
-                <h2 align="center">Service Juridique, Communication et Partenariats</h2>
-                <br>
-                <h4 align="center" style="margin-bottom: 70px" ;>Le Service Juridique, Communication et Partenariats a
-                    pour missions de
-                    :</h4><br>
-
-                <!-- <ul style="font-size:17px">
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Apporter une assistance juridique aux différents services de l’UVCI ;
-          </li>
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Assister et conseiller les responsables en matière d’élaboration ou d’interprétation ;
-          </li>
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Aider à la prise de décision ;
-          </li>
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Assurer la veille juridique ;
-          </li>
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Veiller à la régularité juridique des actions à entreprendre ;
-          </li>
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Protéger les intérêts de l’UVCI ;
-          </li>
-          <li>
-            <i class="fa fa-check" style="color:green" aria-hidden="true"> </i>
-            Participer à la rédaction des contrats.
-          </li>
-        </ul> -->
-
-
+    <div class="container mt-5 mb-5" style="box-shadow: inset 0 0 0.5em blue;">
+        <section class="our-webcoderskull padding-lg">
+            <div class="container pt-3">
+                <a href="http://event.uvci.edu.ci/" class="blink" target="_blank">Plateforme Event</a>
+                <div class="row">
+                    <h2 class="text-center mt-4 mb-5" style="color: #92278f; font-weight: bold">
+                        Service Juridique, Communication et Partenariats
+                    </h2>
+                    <h4 class="text-center mb-4">
+                        Le Service Juridique, Communication et Partenariats a pour missions de :
+                    </h4>
+                </div>
+                <ul class="row">
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/logo-juridique.png')}}" class="img-responsive" alt=""></figure>
+                            <p>Apporter une assistance juridique aux différents services de l’UVCI ;<br>(CSSU</p>
+                        </div>
+                    </li>
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/logo_assist2.jpg')}}" class="img-responsive" alt=""></figure>
+                            <p>Assister et conseiller les responsables en matière d’élaboration ou d’interprétation ;</p>
+                        </div>
+                    </li>
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/decision.png')}}" class="img-responsive" alt=""></figure>
+                            <p>Aider à la prise de décision ;</p>
+                        </div>
+                    </li>
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/veille_juridique.png')}}" class="img-responsive" alt=""></figure>
+                            <p>Assurer la veille juridique</p>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="row">
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/logo-juridique.png')}}" class="img-responsive" alt=""></figure>
+                            <p>Veiller à la régularité juridique des actions à entreprendre ;</p>
+                        </div>
+                    </li>
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/logo_contrat.jpg')}}" class="img-responsive" alt=""></figure>
+                            <p>Protéger les intérêts del’UVCI et participer à la rédaction des contrats;</p>
+                        </div>
+                    </li>
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/logo_event.jpg')}}" class="img-responsive" alt=""></figure>
+                            <p>Organiser les évènements ;</p>
+                        </div>
+                    </li>
+                    <li class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 250px;" id="presentation">
+                            <figure><img src="{{asset('client/assets/img/missions/logo_assist2.jpg')}}" class="img-responsive" alt=""></figure>
+                            <p>Porter assistance aux clients</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </div>
-
-
-        <div class="container">
-            <div class="row mb-0" style="margin-top:-80px; margin-bottom: 70px" ;>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-
-                    <a href="#">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/network.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4> Apporter une assistance juridique aux différents services de l’UVCI ;<br>(CSSU)
-                                </h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-
-                    <a href="#">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/bourse.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4> Assister et conseiller les responsables en matière d’élaboration ou
-                                    d’interprétation
-                                    ;<br></h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-
-                    <a href="#">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/tutor.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4>Aider à la prise de décision ;<br></h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6">
-
-                    <a href="#">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/school.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4>Assurer la veille juridique<br></h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <br> <br> <br> <br>
-            <div class="row mb-0" style="margin-top:-80px">
-
-                <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-
-                    <a href="#">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/network.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4> Veiller à la régularité juridique des actions à entreprendre ;<br></h4>
-                            </div>
-                        </div>
-
-                        <a>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-
-                    <a href="#">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/bourse.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4> Protéger les intérêts del’UVCI et participer à la rédaction des contrats;
-                                    ;<br></h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 perso-mb">
-
-                    <a href="https://event.uvci.edu.ci/event/public/home">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/tutor.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4>Organiser les évènements ;<br></h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6">
-
-                    <a href="https://assistance.uvci.edu.ci/">
-                        <div class="box">
-                            <div class="our-services privacy">
-                                <div class="icon">
-                                    <img src="https://assistance.uvci.edu.ci/communaute/public/assets/images/icons/school.png"
-                                        width="70" height="70">
-                                </div>
-                                <h4>Porter assistance aux clients<br></h4>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-        <br>
-
+        </section>
     </div>
-</section>
 
+    <style>
+        .blink {
+            animation: blinker 2s linear infinite;
+            background-color: rgb(18, 166, 80);
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        a:hover{
+            text-decoration: none;
+            color: white;
+        }
 
-<style>
-
-</style>
+    </style>
 @endsection()

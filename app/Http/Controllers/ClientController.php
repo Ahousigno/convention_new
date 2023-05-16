@@ -93,4 +93,8 @@ class ClientController extends Controller
         // Alert::success('succes', "nouvel agent ajouté!");
         return view('client.partenariat')->with("success", "demande soumise avec succès!");
     }
+
+    public function all_partenariats(){
+        return view('client.all_partenariats');
+    }
 }
