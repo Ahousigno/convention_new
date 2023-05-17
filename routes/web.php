@@ -35,7 +35,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard')
 Route::get('admin/attente', [AdminController::class, 'demande_attente'])->name('admin.partenariat.demande_attente');
 Route::get('edit/attente/{id}', [AdminController::class, 'edit_attente'])->name('admin.partenariat.edit_demande');
 Route::post('edit/update', [AdminController::class, 'edit_update'])->name('add_update');
-Route::get('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
+Route::post('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
 
 Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('lien_drive');
 

@@ -21,16 +21,13 @@ class AdminController extends Controller
         return view('admin.dashboard')->with($data);
     }
 
-    public function demande_attente(Request $request)
+    public function demande_attente()
     {
-
-        $partenariats = Demandepartenariat::paginate('30')->sortByDesc('created_at')->all();
-        // return view('admin.users.index')->with('users', $users);
-        // $partenariats = DB::table('Demandepartenariats')->select('*')->paginate('10')->orderByDesc('created_at')->get();
+        // $partenariats = Demandepartenariat::paginate('10')->sortByDesc('created_at')->all();
+        $partenariats = DB::table('demandepartenariats')
+            ->select('*')
+            ->orderBy('created_at', 'asc')->first();
         return view('admin.partenariat.demande_attente', compact('partenariats'));
-        // $data['i'] = 1;
-        // $data['partenariat'] = Demandepartenariat::orderByDesc('created_at')->get();
-        // return view('admin.partenariat.demande_attente')->with($data);
     }
 
     public function edit_attente($id)
@@ -101,16 +98,22 @@ class AdminController extends Controller
 
         return back();
     }
-
+    public function demande_attente_delete(Demandepartenariat $partenariat)
+    {
+        $partenariat->delete();
+        return view('admin.partenariat.demande_attente');
+    }
 
     public function motif_modal(Request $request)
     {
+        dd('partenariat');
         $this->validate($request, [
             'motif_rejet' => ['required', 'max:600']
         ]);
         $partenariat = Demandepartenariat::first();
         $partenariat->can_be_partner == 'NON';
         $partenariat->motif_rejet = $request->motif_rejet;
+
         $partenariat->update();
         // Alert::success('Succès', 'L\'évènement a bien été réfusé !');
         // $recipient = ['secretariat@uvci.edu.ci', 'georgette.assemian@uvci.edu.ci', 'medias@uvci.edu.ci', 'signo.aviet@uvci.edu.ci', 'patrimoine@uvci.edu.ci', 'dg@uvci.edu.ci',  $event->user->email]; //Emails des destinataires
@@ -120,7 +123,7 @@ class AdminController extends Controller
         //     'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
         //     "subject" => "Validation des évènements",
         //     "motifRejet" => $request->motif,
-        //     "event_name" => $event->nom,
+        //     "
         // ];
         // Mail::send('admin.subdirector.emails.rejectEvent', $mail_data, function ($message) use ($mail_data) {
         //     $message->to($mail_data['recipient'])

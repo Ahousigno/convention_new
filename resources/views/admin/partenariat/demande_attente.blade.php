@@ -1,6 +1,9 @@
 @extends('layouts.layout_admin')
 @section('content')
 <!-- Main content -->
+<?php
+$partenariats = App\Models\Demandepartenariat::first();
+?>
 <section class="content">
     <div class="container-fluid">
         <!-- Info boxes -->
@@ -27,7 +30,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-                                    @forelse($partenariats as $partenariat)
+                                    @foreach($partenariats as $partenariat)
                                     <tr style="font-size:13px">
                                         <th scope="row">{{$loop->index + 1}}</th>
                                         <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
@@ -42,7 +45,7 @@
                                                 <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}" title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
                                                     </i> </a>
 
-                                                <form action="{{route('admin.demande_attentes_delete')}}" method="post">
+                                                <form action="{{route('admin.demande_attentes_delete', $partenariat->id)}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value='{{$partenariat->id}}' />
                                                     <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
@@ -53,11 +56,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @empty
+
                                     <tr>
                                         <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
                                     </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="mt-3">

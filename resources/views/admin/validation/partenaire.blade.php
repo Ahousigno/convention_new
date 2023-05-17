@@ -11,7 +11,7 @@
                     <div class="card-header">Liste des Partenaires</div>
                     <div class="card-body">
                         <?php
-                        $validation = App\Models\Validation::first();
+                        $partenariat = App\Models\Demandepartenariat::first();
                         ?>
                         <br /><br />
                         <div class="table-responsive">
@@ -29,21 +29,25 @@
 
                                     <tr style="font-size:13px">
                                         <td></td>
-                                        <td style="width:160px"> <img src="{{asset($validation->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
-                                        <td>{{$validation->libelle_structure}}</td>
+                                        <td style="width:160px"> <img
+                                                src="{{asset('/docs/images/lms/'.$partenariat->logo)}}"
+                                                class="img-fluid" style="width:20%" alt=""> </td>
+                                        <td>{{$partenariat->libelle_structure}}</td>
 
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
 
                                                 <a href="">
-                                                    en savoir plus <i style="color:blue; font-size:10px" class=" fa fa-plus">
+                                                    en savoir plus <i style="color:blue; font-size:10px"
+                                                        class=" fa fa-plus">
                                                     </i>
                                                 </a>
 
                                             </div>
                                         </td>
                                         <td>
-                                            <a target="_blank" title="Imprimer la Convention" style="padding-left:30px" href="">
+                                            <a target="_blank" title="Imprimer la Convention" style="padding-left:30px"
+                                                href="">
                                                 convention
                                             </a>
                                         </td>
@@ -67,26 +71,26 @@
 
 @section('js')
 <script type="text/javascript">
-    $("select[name='sous_type_recru']").change(function() {
-        var sous_type_recru = $(this).val();
-        var type_recru = $("input[name='type_recru_id']").val()
-        var token = $("input[name='_token']").val();
-        $.ajax({
-            url: "",
-            method: 'POST',
-            data: {
-                sous_type_recru: sous_type_recru,
-                type_recru: type_recru,
-                _token: token
-            },
-            success: function(data) {
-                $("#content").html('');
-                $("#content").html(data.response);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
+$("select[name='sous_type_recru']").change(function() {
+    var sous_type_recru = $(this).val();
+    var type_recru = $("input[name='type_recru_id']").val()
+    var token = $("input[name='_token']").val();
+    $.ajax({
+        url: "",
+        method: 'POST',
+        data: {
+            sous_type_recru: sous_type_recru,
+            type_recru: type_recru,
+            _token: token
+        },
+        success: function(data) {
+            $("#content").html('');
+            $("#content").html(data.response);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
     });
+});
 </script>
 @endsection
