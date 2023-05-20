@@ -2,7 +2,7 @@
 @section('content')
 <!-- Main content -->
 <?php
-$partenariats = App\Models\Demandepartenariat::first();
+$partenariat = App\Models\Demandepartenariat::first();
 ?>
 <section class="content">
     <div class="container-fluid">
@@ -30,12 +30,10 @@ $partenariats = App\Models\Demandepartenariat::first();
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-                                    @foreach($partenariats as $partenariat)
+                                    @forelse($partenariats as $partenariat)
                                     <tr style="font-size:13px">
                                         <th scope="row">{{$loop->index + 1}}</th>
-                                        <td style="width:160px"> <img
-                                                src="{{asset('/docs/images/lms/'.$partenariat->logo)}}"
-                                                class="img-fluid" style="width:20%" alt=""> </td>
+                                        <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
                                         <td>{{$partenariat->libelle_structure}}</td>
                                         <td>{{$partenariat->nom}}</td>
                                         <td>{{$partenariat->prenoms}}</td>
@@ -44,18 +42,13 @@ $partenariats = App\Models\Demandepartenariat::first();
 
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
-                                                <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}"
-                                                    title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
+                                                <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}" title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
                                                     </i> </a>
 
-                                                <form
-                                                    action="{{route('admin.demande_attentes_delete', $partenariat->id)}}"
-                                                    method="post">
+                                                <form action="{{route('admin.demande_attentes_delete', $partenariat->id)}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value='{{$partenariat->id}}' />
-                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')"
-                                                        style="margin-left:10px; border:0px" type="submit"
-                                                        name="submit">
+                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
                                                         <i style="color:red" class=" fa fa-trash">
                                                         </i>
                                                     </button>
@@ -63,11 +56,11 @@ $partenariats = App\Models\Demandepartenariat::first();
                                             </div>
                                         </td>
                                     </tr>
-
+                                    @empty
                                     <tr>
                                         <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
                                     </tr>
-                                    @endforeach
+                                    @endforelse
                                 </tbody>
                             </table>
                             <div class="mt-3">
@@ -85,26 +78,26 @@ $partenariats = App\Models\Demandepartenariat::first();
 
 @section('js')
 <script type="text/javascript">
-$("select[name='sous_type_recru']").change(function() {
-    var sous_type_recru = $(this).val();
-    var type_recru = $("input[name='type_recru_id']").val()
-    var token = $("input[name='_token']").val();
-    $.ajax({
-        url: "",
-        method: 'POST',
-        data: {
-            sous_type_recru: sous_type_recru,
-            type_recru: type_recru,
-            _token: token
-        },
-        success: function(data) {
-            $("#content").html('');
-            $("#content").html(data.response);
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        }
+    $("select[name='sous_type_recru']").change(function() {
+        var sous_type_recru = $(this).val();
+        var type_recru = $("input[name='type_recru_id']").val()
+        var token = $("input[name='_token']").val();
+        $.ajax({
+            url: "",
+            method: 'POST',
+            data: {
+                sous_type_recru: sous_type_recru,
+                type_recru: type_recru,
+                _token: token
+            },
+            success: function(data) {
+                $("#content").html('');
+                $("#content").html(data.response);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
     });
-});
 </script>
 @endsection
