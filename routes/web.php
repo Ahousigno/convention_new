@@ -57,3 +57,21 @@ Route::post('/validation', [AdminController::class, 'validation_store'])->name('
 //partie partenaire
 
 Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.validation.partenaire');
+//categorie
+
+
+
+Route::get('/categorie', [AdminController::class, 'categorie'])->name('admin.categorie.create');
+Route::post('/categorie_save', [AdminController::class, 'categorie_save'])->name('categorie_save');
+Route::get('/categorie_edit/{id}', [AdminController::class, 'categorie_edit'])->name('admin.categorie.edit');
+Route::post('/categorie_edit/{id}', [AdminController::class, 'categorie_update'])->name('admin.categorie_update');
+Route::post('/categorie_delete', [AdminController::class, 'categorie_delete'])->name('admin.categorie_delete');
+
+
+//article
+Route::get('/article_base', [AdminController::class, 'article_base'])->name('admin.article.base');
+Route::get('/article_add', [AdminController::class, 'article_add'])->name('admin.article.add');
+Route::post('/article_save', [AdminController::class, 'article_save'])->name('article_save');
+Route::get('/article_edit/{id}', [AdminController::class, 'article_edit'])->name('admin.article.edit');
+Route::post('/article_edit/{id}', [AdminController::class, 'article_update'])->name('admin.article_update');
+Route::post('/article_delete', [AdminController::class, 'article_delete'])->name('admin.article_delete');

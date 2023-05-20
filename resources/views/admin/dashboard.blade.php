@@ -25,8 +25,7 @@
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-warning elevation-1"><i style="font-size:25px"
-                            class="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
+                    <span class="info-box-icon bg-warning elevation-1"><i style="font-size:25px" class="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
 
                     <div class="info-box-content">
                         <a href="{{route('admin.validation.encours')}}"><span class="info-box-text">Validation de
@@ -49,8 +48,7 @@
 
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-times"
-                            aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-times" aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
                         <a href="#"><span class="info-box-text">Demande
@@ -67,11 +65,11 @@
 
             <div class=" col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-secondary elevation-1"><i class="fa fa-hashtag"
-                            aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-secondary elevation-1"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Categories de Partenariats</span>
+                        <a href="{{route('admin.categorie.create')}}"><span class="info-box-text">Categories de
+                                Partenariats</span></a>
                         <span class="info-box-number">
                             {{--{{$demand_attentes->count()}}--}}
                         </span>
@@ -81,10 +79,9 @@
                 <!-- /.info-box -->
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class=" col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-handshake-o"
-                            aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-handshake-o" aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
                         <a href="{{route('admin.validation.partenaire')}}"><span class="info-box-text">Nos
@@ -100,11 +97,11 @@
 
             <div class=" col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-book"
-                            aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-book" aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Article de bases</span>
+                        <a href="{{route('admin.article.base')}}"><span class="info-box-text">Articles de Base
+                            </span></a>
                         <span class="info-box-number">
                             {{--{{$demand_attentes->count()}}--}}
                         </span>
@@ -129,8 +126,8 @@
 
 @section('js')
 <script type="text/javascript">
-$(".fieldset").ready(function() {
-    $('.fieldset').prop('disabled', true);
-});
+    $(".fieldset").ready(function() {
+        $('.fieldset').prop('disabled', true);
+    });
 </script>
 @endsection()

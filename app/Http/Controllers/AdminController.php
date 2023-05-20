@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Categorie;
 use Laracasts\Flash\Flash;
 use App\Models\Demandepartenariat;
 use App\Models\Validation;
 use Exception;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
@@ -24,9 +28,7 @@ class AdminController extends Controller
     public function demande_attente()
     {
         // $partenariats = Demandepartenariat::paginate('10')->sortByDesc('created_at')->all();
-        $partenariats = DB::table('demandepartenariats')
-            ->select('*')
-            ->orderBy('created_at', 'asc')->first();
+        $partenariats = Demandepartenariat::all();
         return view('admin.partenariat.demande_attente', compact('partenariats'));
     }
 
@@ -39,15 +41,15 @@ class AdminController extends Controller
     public function edit_update(Request $request)
     {
         $request->validate([
-            'nom' => ['required'],
-            'prenoms' => ['required'],
-            'email' => ['required'],
-            'contact_tel' => ['required'],
-            'libelle_structure' => ['required'],
-            'logo' => ['nullable'],
-            'situation_geo' => ['required'],
-            'motif' => ['required'],
-            'exemple_convention' => ['nullable'],
+            'nom' => 'required',
+            'prenoms' => 'required',
+            'email' => 'required',
+            'contact_tel' => 'required',
+            'libelle_structure' => 'required',
+            'logo' => 'nullable',
+            'situation_geo' => 'required',
+            'motif' => 'required',
+            'exemple_convention' => 'nullable',
         ]);
         $partenariat = new Demandepartenariat();
         $partenariat->nom = $request->nom;
@@ -71,29 +73,6 @@ class AdminController extends Controller
             $doc_lm->move(public_path("docs/images/lms"), $lm_name);
             $partenariat->exemple_convention = $lm_name;
         }
-        // if ($partenariat->can_be_partner == 'OUI') {
-        //     $this->validate($request, [
-        //         'motif_rejet' => ['required', 'max:600']
-        //     ]);
-        //     $partenariat = Demandepartenariat::first();
-        //     $partenariat->can_be_partner == 'NON';
-        //     $partenariat->motif_rejet = $request->motif_rejet;
-        //     $partenariat->update();
-        //     return back()->with("success",  "Demande rejetée!");
-        // } elseif ($partenariat->can_be_partner == 'NON') {
-        //     $this->validate($request, [
-        //         'drive' => ['required', 'max:600']
-        //     ]);
-        //     $partenariat = Demandepartenariat::first();
-        //     $partenariat->can_be_partner == 'OUI';
-        //     $partenariat->drive = $request->linkDriveModal;
-        //     $partenariat->save();
-        //     return view('client.partenariat')->with("success", "demande acceptée!");
-
-        //     return back()->with("success",  "Demande acceptée!");
-        // } else {
-        //     return back()->with("error",  "Definissez l'égibilité de la demande!");
-        // }
         $partenariat->update();
 
         return back();
@@ -114,22 +93,20 @@ class AdminController extends Controller
         $partenariat->can_be_partner == 'NON';
         $partenariat->motif_rejet = $request->motif_rejet;
 
+        $recipient = [$partenariat->email]; //Emails des destinataires
+        $mail_data = [
+            'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+            'fromEmail' => Auth::user()['email'],
+            'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
+            "subject" => "Validation de partenariat",
+            "motifRejet" => $request->motif_rejet,
+        ];
+        Mail::send('email.rejet', $mail_data, function ($message) use ($mail_data) {
+            $message->to($mail_data['recipient'])
+                ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                ->subject($mail_data['subject']);
+        });
         $partenariat->update();
-        // Alert::success('Succès', 'L\'évènement a bien été réfusé !');
-        // $recipient = ['secretariat@uvci.edu.ci', 'georgette.assemian@uvci.edu.ci', 'medias@uvci.edu.ci', 'signo.aviet@uvci.edu.ci', 'patrimoine@uvci.edu.ci', 'dg@uvci.edu.ci',  $event->user->email]; //Emails des destinataires
-        // $mail_data = [
-        //     'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
-        //     'fromEmail' => Auth::user()['email'],
-        //     'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
-        //     "subject" => "Validation des évènements",
-        //     "motifRejet" => $request->motif,
-        //     "
-        // ];
-        // Mail::send('admin.subdirector.emails.rejectEvent', $mail_data, function ($message) use ($mail_data) {
-        //     $message->to($mail_data['recipient'])
-        //         ->from($mail_data['fromEmail'], $mail_data['fromName'])
-        //         ->subject($mail_data['subject']);
-        // });
         return back()->with("success",  "Demande rejetée!");
     }
 
@@ -141,6 +118,21 @@ class AdminController extends Controller
         $partenariat = Demandepartenariat::first();
         $partenariat->can_be_partner == 'OUI';
         $partenariat->drive = $request->drive;
+
+        $recipient = [$partenariat->email]; //Emails des destinataires
+        $mail_data = [
+            'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+            'fromEmail' => Auth::user()['email'],
+            'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
+            "subject" => "Validation de partenariat",
+            "motifvalide" => $request->drive,
+        ];
+        Mail::send('email.valide', $mail_data, function ($message) use ($mail_data) {
+            $message->to($mail_data['recipient'])
+                ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                ->subject($mail_data['subject']);
+        });
+
         $partenariat->update();
         return view('admin.validation.encours')->with("success", "demande acceptée!");
     }
@@ -160,7 +152,7 @@ class AdminController extends Controller
 
         $request->validate([
             'nom_convention' => ['required'],
-            // 'categorie_id' => 'required',
+            'categorie_id' => 'required',
             'date_debut' => ['required'],
             'date_fin' => ['required'],
             'file_convention' => ['required'],
@@ -194,5 +186,109 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         return view('admin.validation.partenaire', compact('validations'));
+    }
+
+
+    //categorie
+
+    public function categorie()
+    {
+        $categories = DB::table('categories')->select('*')
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
+        return view('admin.categorie.create', compact('categories'));
+    }
+
+    public function categorie_save(Request $request)
+    {
+        $request->validate([
+            'libelle_categorie' => ['required'],
+        ]);
+        $categorie =  new Categorie();
+        $categorie->libelle_categorie = $request->libelle_categorie;
+        $categorie->save();
+        return view('admin.categorie.create')->with("success", "categorie enregistrée");
+    }
+
+    public function categorie_edit($id)
+    {
+        $partenariat = Categorie::find($id);
+        return view('admin.categorie.create', compact('categorie'));
+    }
+    public function categorie_update(Request $request)
+    {
+        $request->validate([
+            'nom' => ['required'],
+        ]);
+        $categorie =  new Categorie();
+        $categorie->libelle_categorie = $request->libelle_categorie;
+        $categorie->update();
+        return view('admin.categorie.create')->with("success", "categorie mise à jour");
+    }
+
+    public function categorie_delete(Categorie $categorie)
+    {
+
+        $categorie->delete();
+
+        return back()->with("success",  "categorie supprimée avec succès!");
+    }
+
+
+    //articles
+
+    public function article_base()
+    {
+        $articles = DB::table('articles')->select('*')
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
+        return view('admin.article.base', compact('articles'));
+    }
+    public function article_add()
+    {
+        return view('admin.article.add');
+    }
+
+    public function article_save(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'ordre' => ['required'],
+            'article' => ['required'],
+        ]);
+        $article =  new Article();
+        $article->name = $request->name;
+        $article->ordre = $request->ordre;
+        $article->article = $request->article;
+        $article->save();
+        return view('admin.article.base')->with("success", "article ajouté");
+    }
+
+    public function article_edit($id)
+    {
+        $article = Article::find($id);
+        return view('admin.article.base', compact('article'));
+    }
+    public function article_update(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'ordre' => ['required'],
+            'article' => ['required'],
+        ]);
+        $article =  new Article();
+        $article->name = $request->name;
+        $article->ordre = $request->ordre;
+        $article->article = $request->article;
+        $article->update();
+        return view('admin.article.base')->with("success", "article mis à jour");
+    }
+
+    public function article_delete(Article $article)
+    {
+
+        $article->delete();
+
+        return back()->with("success",  "article supprimé avec succès!");
     }
 }

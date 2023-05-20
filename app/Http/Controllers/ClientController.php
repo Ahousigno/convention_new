@@ -6,7 +6,7 @@ use App\Models\Demandepartenariat;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Flash;
-
+use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
@@ -76,25 +76,27 @@ class ClientController extends Controller
             $doc_lm->move(public_path("docs/images/lms"), $lm_name);
             $partenariat->exemple_convention = $lm_name;
         }
-        // if ($request->hasFile('exemple_convention')) {
-        //     $validator = Validator::make($request->all(), [])->validate();
-        //     $exemple_convention = $request->exemple_convention;
-        //     $piece_name = '/source_recru/exemple_convention/exemple_convention_' . $exemple_convention->getClientOriginalExtension();
-        //     $exemple_convention->move('source_recru/exemple_convention/', $piece_name);
-        //     $partenariat['exemple_convention'] = $piece_name;
-        // }
-        // if ($request->logo) {
-        //     $doc_lm = $request->logo;
-        //     $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
-        //     $doc_lm->move(public_path("docs/images/lms"), $lm_name);
-        //     $user->logo = $lm_name;
+
+        $recipient = ['georgette.assemian@uvci.edu.ci',  'signo.aviet@uvci.edu.ci', 'dg@uvci.edu.ci']; //Emails des destinataires
+        $mail_data = [
+            'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+            'fromEmail' => $partenariat->email,
+            'fromName' => $partenariat->libelle_structure,
+            "subject" => "Demande de partenariat",
+        ];
+        Mail::send('emails.partenariat', $mail_data, function ($message) use ($mail_data) {
+            $message->to($mail_data['recipient'])
+                ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                ->subject($mail_data['subject']);
+        });
 
         $partenariat->save();
-        // Alert::success('succes', "nouvel agent ajouté!");
+
         return view('client.partenariat')->with("success", "demande soumise avec succès!");
     }
 
-    public function all_partenariats(){
+    public function all_partenariats()
+    {
         return view('client.all_partenariats');
     }
 }

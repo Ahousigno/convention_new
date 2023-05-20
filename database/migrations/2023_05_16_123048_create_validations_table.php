@@ -21,6 +21,7 @@ class CreateValidationsTable extends Migration
             $table->text('date_fin')->require();
             $table->string('file_convention', 191)->require();
             $table->string('image_convention', 191)->require();
+            $table->string('categorie_id', 191)->require();
             $table->timestamps();
         });
     }

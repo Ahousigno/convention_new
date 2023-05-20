@@ -106,7 +106,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.categorie.create')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-hashtag"></i>
                                 <p>Categories</p>
                             </a>
@@ -115,8 +115,8 @@
                                     style="font-size:13px" class="fa fa-users nav-icon"></i>
                                 <p>Partenaires</p>
                             </a></li>
-                        <li class="nav-item"><a href="#" class="nav-link"><i style="font-size:13px"
-                                    class="fa fa-book nav-icon"></i>
+                        <li class="nav-item"><a href="{{route('admin.article.base')}}" class="nav-link"><i
+                                    style="font-size:13px" class="fa fa-book nav-icon"></i>
                                 <p>Articles de Bases</p>
                             </a></li>
 
