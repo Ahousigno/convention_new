@@ -90,9 +90,9 @@
                 </a>
             </li>
         </ul>
-        <button class="btn btn-primary">
-            <a href="{{route('all_partenariats')}}" style="color: white; text-decoration: none">Voir plus</a>
-        </button>
+
+            <a href="{{route('all_partenariats')}}" class="btn btn-primary" style="color: white; text-decoration: none">Voir plus</a>
+
     </div>
 </section>
 
