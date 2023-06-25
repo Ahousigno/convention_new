@@ -30,7 +30,7 @@
             document.querySelector('#link_drive_content').innerHTML = "";
             document.querySelector('#motif_content').innerHTML =
                 `
-              <form  action="{{route('motif_rejet')}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data"> {!! csrf_field() !!}
+              <form  action="{{route('rejet')}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data"> {!! csrf_field() !!}
                     <div class="modal-body">
                           <div class="form-group">
                               <label for="motifRejet">Entrez motif de rejet</label>

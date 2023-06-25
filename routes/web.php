@@ -37,12 +37,10 @@ Route::get('edit/attente/{id}', [AdminController::class, 'edit_attente'])->name(
 Route::post('edit/update', [AdminController::class, 'edit_update'])->name('add_update');
 Route::post('demande/delete', [AdminController::class, 'demande_attente_delete'])->name('admin.demande_attentes_delete');
 
+//modal
 Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('lien_drive');
-
-Route::post('modal/motif', [AdminController::class, 'motif_modal'])->name('motif_rejet');
-
+Route::post('modal/motif', [AdminController::class, 'motif_modal'])->name('rejet');
 require __DIR__ . '/auth.php';
-
 
 
 #Convention
@@ -54,13 +52,13 @@ Route::get('/demande_convention', [ConventionController::class, 'show_demande_co
 #validation
 Route::get('/validation', [AdminController::class, 'validation_encours'])->name('admin.validation.encours');
 Route::post('/validation', [AdminController::class, 'validation_store'])->name('validation_partner');
+
+
 //partie partenaire
-
 Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.validation.partenaire');
+
+
 //categorie
-
-
-
 Route::get('/categorie', [AdminController::class, 'categorie'])->name('admin.categorie.create');
 Route::post('/categorie_save', [AdminController::class, 'categorie_save'])->name('categorie_save');
 Route::get('/categorie_edit/{id}', [AdminController::class, 'categorie_edit'])->name('admin.categorie.edit');

@@ -85,12 +85,12 @@ class AdminController extends Controller
 
     public function motif_modal(Request $request)
     {
-        dd('partenariat');
+        
         $this->validate($request, [
             'motif_rejet' => ['required', 'max:600']
         ]);
         $partenariat = Demandepartenariat::first();
-        $partenariat->can_be_partner == 'NON';
+        // $partenariat->can_be_partner == 'NON';
         $partenariat->motif_rejet = $request->motif_rejet;
 
         $recipient = [$partenariat->email]; //Emails des destinataires
@@ -121,7 +121,7 @@ class AdminController extends Controller
 
         $recipient = [$partenariat->email]; //Emails des destinataires
         $mail_data = [
-            'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+            'recipient' => $recipient, //
             'fromEmail' => Auth::user()['email'],
             'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
             "subject" => "Validation de partenariat",

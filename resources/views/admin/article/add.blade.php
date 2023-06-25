@@ -12,7 +12,8 @@
                         <h3 class="card-title">Edition de l'Article</h3>
                     </div>
 
-                    <form action="{{route('article_save')}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data" style="font-size:13px">
+                    <form action="{{route('article_save')}}" method="post" accept-charset="UTF-8"
+                        enctype="multipart/form-data" style="font-size:13px">
                         <input type="hidden" name="_token" value="">
                         <div class="card-body">
                             <div class="row">
@@ -33,8 +34,9 @@
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label>Article un Article</label><br>
-                                        <textarea class="form-control" id="summary-ckeditor" name="article"></textarea>
+                                        <label>Article /label><br>
+                                            <textarea class="form-control" id="summary-ckeditor"
+                                                name="article"></textarea>
                                     </div>
                                 </div>
 
