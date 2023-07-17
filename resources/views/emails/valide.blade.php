@@ -40,24 +40,24 @@
                                                     <p>
                                                         votre demande de partenariat avec l'UVCI a été acceptée
                                                         .<br>
-                                                        utilisez ce lien google drive pour collaborer sur l'édition de
-                                                        la convention:<span style="font-weight: bold">
-                                                            {{$motifvalide}} </span>
-                                                        {{--<span style="color: red;">{{Carbon\Carbon::parse($date)->translatedFormat('D d F Y')}}
+                                                            Cliquer sur ce lien google drive pour collaborer sur l'édition de
+                                                        la convention:<span style="font-weight: bold"> <br>
+                                                           <a href="{{$data["drive"]}}">cliquer ici</a></span>
+                                                        <!-- {{--<span style="color: red;">{{Carbon\Carbon::parse($date)->translatedFormat('D d F Y')}}
                                                         de {{ $heuredebut }} à {{ $heurefin }}.
-                                                        </span><br>--}}
+                                                        </span><br>--}} -->
                                                     </p>
 
                                                     <button>
-                                                        < <a href="{{route('client.home')}}" style="font-size: large">
-                                                            connexion</a>
+                                                         <a href="{{route('client.accueil')}}" style="font-size: large">
+                                                            retourner au site </a>
                                                     </button>
                                                     <p>Cordialement !</p> <br>
-                                                    {{--<p>Responsable : {{ $createdByName }} <br> Email :
-                                                    {{ $createdByEmail }} </p>
-                                                    <p> <span style="font-weight:bold">{{ $fromName }}</span><br>
-                                                        Email : {{ $fromEmail }}
-                                                    </p>--}}
+                                                    <p>Responsable : {{ $data['nom'] . " " . $data['prenoms']}} <br> Email :
+                                                    {{ $data['email'] }} </p>
+                                                    <p> <span style="font-weight:bold">{{ Auth::user()->name}}</span><br>
+                                                        Email : {{ Auth::user()->email }}
+                                                    </p>
                                                 </td>
                                             </tr>
                                             <hr>

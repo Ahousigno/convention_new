@@ -185,10 +185,21 @@
                 </div>
             </div><br>
 
-            {{--<div class="container">
-                @include('flash::message')
-            </div>--}}
+           <div class="container">
+                
+                @if(session('success'))
+                    <div class="alert alert-success">
+                         {{session('success')}}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                    {{session('error')}}
+                    </div>
+                @endif
 
+            </div>
+            <br>
             @yield('content')
             <!-- /.content-wrapper -->
 

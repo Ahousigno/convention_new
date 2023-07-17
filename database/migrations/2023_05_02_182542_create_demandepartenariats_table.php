@@ -24,7 +24,7 @@ class CreateDemandepartenariatsTable extends Migration
             $table->text('motif')->nullable();
             $table->string('logo', 191)->nullable();
             $table->string('exemple_convention', 191)->nullable();
-            $table->string('can_be_partner')->default('NON');
+            $table->string('can_be_partner')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

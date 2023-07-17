@@ -40,24 +40,24 @@
                                                     <p>
                                                         votre demande de partenariat avec l'UVCI a été
                                                         réfusée.<br>
-                                                        Voici les motifs de réfus :<span style="font-weight: bold">
-                                                            {{$motifRejet}} </span>
-                                                        {{--<span style="color: red;">{{Carbon\Carbon::parse($date)->translatedFormat('D d F Y')}}
+                                                        Voici les motifs de réfus :<span style="font-weight: bold"> <br>
+                                                            {{$data['motif_rejet']}} </span>
+                                                        <!-- {{--<span style="color: red;">{{Carbon\Carbon::parse($date)->translatedFormat('D d F Y')}}
                                                         de {{ $heuredebut }} à {{ $heurefin }}.
-                                                        </span><br>--}}
+                                                        </span><br>--}} -->
                                                     </p>
 
                                                     <button>
-                                                        < <a href="{{route('client.accueil')}}"
+                                                         <a href="{{route('client.accueil')}}"
                                                             style="font-size: large">
-                                                            connexion</a>
+                                                            retour au site</a>
                                                     </button>
                                                     <p>Cordialement !</p> <br>
-                                                    {{--<p>Responsable : {{ $createdByName }} <br> Email :
-                                                    {{ $createdByEmail }} </p>
-                                                    <p> <span style="font-weight:bold">{{ $fromName }}</span><br>
-                                                        Email : {{ $fromEmail }}
-                                                    </p>--}}
+                                                    <p>Responsable : {{ $data['nom'] . " " . $data['prenoms'] }} <br> Email :
+                                                    {{ $data["email"] }} </p>
+                                                    <p> <span style="font-weight:bold">{{ Auth::user()->name }}</span><br>
+                                                        Email : {{ Auth::user()->email }}
+                                                    </p>
                                                 </td>
                                             </tr>
                                             <hr>

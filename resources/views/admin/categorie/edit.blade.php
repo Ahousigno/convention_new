@@ -20,17 +20,17 @@
                     </div>
 
 
-                    <form action="{{ $add_update }}" style="font-size:13px" method="post" accept-charset="UTF-8"
+                    <form action="{{ route('admin.categorie_update') }}" style="font-size:13px" method="post" accept-charset="UTF-8"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-
+                            <input type="hidden" name="id" value="{{$categorie->id ?? null}}">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Libelle de la Categorie</label>
                                         <input type="text" class="form-control" name="libelle_categorie"
-                                            value="{{$categorie->libelle_categorie}}">
+                                            value="{{$categorie->libelle_categorie ?? '' }}">
                                     </div>
                                 </div>
                             </div>

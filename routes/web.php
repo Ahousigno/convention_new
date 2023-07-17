@@ -60,9 +60,10 @@ Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.v
 
 //categorie
 Route::get('/categorie', [AdminController::class, 'categorie'])->name('admin.categorie.create');
+Route::get('/categorie_create', [AdminController::class, 'categorie_edit'])->name('categorie_create');
 Route::post('/categorie_save', [AdminController::class, 'categorie_save'])->name('categorie_save');
 Route::get('/categorie_edit/{id}', [AdminController::class, 'categorie_edit'])->name('admin.categorie.edit');
-Route::post('/categorie_edit/{id}', [AdminController::class, 'categorie_update'])->name('admin.categorie_update');
+Route::post('/categorie_edit/{id?}', [AdminController::class, 'categorie_update'])->name('admin.categorie_update');
 Route::post('/categorie_delete', [AdminController::class, 'categorie_delete'])->name('admin.categorie_delete');
 
 

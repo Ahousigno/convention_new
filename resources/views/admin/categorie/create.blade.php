@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">Categories</div>
                     <div class="card-body">
-                        <a href="#" class="btn btn-success btn-icon" data-bs-toggle="modal" data-bs-target="#categorie" data-placement=" top" title="" data-original-title="">
+                        <a href="{{ route('categorie_create') }}" class="btn btn-success btn-icon" data-bs-toggle="modal" data-bs-target="#categorie" data-placement=" top" title="" data-original-title="">
                             <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
                         </a>
                         <br /><br />
@@ -24,9 +24,9 @@
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-                                    @forelse($categories as $categorie)
+                                    @forelse($categories as $i => $categorie)
                                     <tr style="font-size:13px">
-                                        <td>{{$i++}}</td>
+                                        <td>{{$i+1}}</td>
                                         <td>{{$categorie->libelle_categorie}}</td>
 
                                         <td>

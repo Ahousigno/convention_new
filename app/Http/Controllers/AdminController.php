@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendDriveMail;
+use App\Mail\SendMotifMail;
 use App\Models\Article;
 use App\Models\Categorie;
 use Laracasts\Flash\Flash;
@@ -27,8 +29,7 @@ class AdminController extends Controller
 
     public function demande_attente()
     {
-        // $partenariats = Demandepartenariat::paginate('10')->sortByDesc('created_at')->all();
-        $partenariats = Demandepartenariat::all();
+        $partenariats = Demandepartenariat::paginate('10')->where('can_be_partner' , null)->sortByDesc('created_at')->all();
         return view('admin.partenariat.demande_attente', compact('partenariats'));
     }
 
@@ -40,6 +41,14 @@ class AdminController extends Controller
 
     public function edit_update(Request $request)
     {
+        if($request->can_be_partner == 'NON'){
+            $demande = Demandepartenariat::find($request->id);
+            $demande->reject = 1 ; 
+            $demande->motif = $request->motif ; 
+            Mail::send(new SendMotifMail($request->all()));
+            $demande->update();
+            return back()->with('success' , "Démande de rejet a bien été transmi") ;
+        }
         $request->validate([
             'nom' => 'required',
             'prenoms' => 'required',
@@ -51,12 +60,13 @@ class AdminController extends Controller
             'motif' => 'required',
             'exemple_convention' => 'nullable',
         ]);
-        $partenariat = new Demandepartenariat();
+        $partenariat = Demandepartenariat::find($request->id);
         $partenariat->nom = $request->nom;
         $partenariat->email = $request->email;
         $partenariat->prenoms = $request->prenoms;
         $partenariat->contact_tel = $request->contact_tel;
-        $partenariat->motif = $request->motif;
+        $partenariat->drive = $request->drive;
+        $partenariat->can_be_partner = $request->can_be_partner;
         $partenariat->situation_geo = $request->situation_geo;
         $partenariat->libelle_structure = $request->libelle_structure;
 
@@ -75,7 +85,9 @@ class AdminController extends Controller
         }
         $partenariat->update();
 
-        return back();
+        Mail::send(new SendDriveMail($request->all()));
+
+        return back()->with("success" , "lien du drive à bien été envoyé !");
     }
     public function demande_attente_delete(Demandepartenariat $partenariat)
     {
@@ -139,12 +151,13 @@ class AdminController extends Controller
     //partie validation
     public function validation_encours()
     {
+        $categories = Categorie::all();
         $partenaires = DB::table('demandepartenariats')->select('*')
             ->where('can_be_partner', 'OUI')
             ->where('drive', '!=', null)
             ->orderBy('created_at', 'desc')
             ->paginate('10');
-        return view('admin.validation.encours', compact('partenaires'));
+        return view('admin.validation.encours', compact('partenaires' , 'categories'));
     }
 
     public function validation_store(Request $request)
@@ -210,27 +223,37 @@ class AdminController extends Controller
         return view('admin.categorie.create')->with("success", "categorie enregistrée");
     }
 
-    public function categorie_edit($id)
-    {
-        $partenariat = Categorie::find($id);
-        return view('admin.categorie.create', compact('categorie'));
+    public function categorie_edit($id = null)
+    { 
+        $categorie = null ; 
+        if($id == null){
+            $categorie = new categorie(); 
+        }else{
+            $categorie = Categorie::find($id);
+        }
+        return view('admin.categorie.edit', compact('categorie'));
     }
     public function categorie_update(Request $request)
     {
         $request->validate([
-            'nom' => ['required'],
+            'libelle_categorie' => ['required'],
         ]);
-        $categorie =  new Categorie();
-        $categorie->libelle_categorie = $request->libelle_categorie;
-        $categorie->update();
-        return view('admin.categorie.create')->with("success", "categorie mise à jour");
+        if($request->id){
+            $categorie = Categorie::find($request->id);
+            $categorie->libelle_categorie = $request->libelle_categorie ; 
+            $categorie->update();
+            return view('admin.categorie.edit' , compact('categorie'))->with("success" , "catégorie bien modifié");
+        }
+       $categorie = Categorie::create($request->all());
+       return redirect(route('admin.categorie.create'))->with("success" , "Categorie bien créer");
+
     }
 
-    public function categorie_delete(Categorie $categorie)
+    public function categorie_delete(Request $request)
     {
-
-        $categorie->delete();
-
+           $categorie = Categorie::find($request->id);
+            Categorie::destroy($categorie->id);
+          $categorie->save();
         return back()->with("success",  "categorie supprimée avec succès!");
     }
 
