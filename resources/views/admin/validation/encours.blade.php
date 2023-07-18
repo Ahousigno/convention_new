@@ -3,9 +3,6 @@
 <!-- Main content -->
 
 <?php
-$partenaire = App\Models\Demandepartenariat::first();
-?>
-<?php
 $categorie = App\Models\Categorie::first();
 ?>
 <section class="content">
@@ -30,7 +27,7 @@ $categorie = App\Models\Categorie::first();
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-
+                                @foreach($partenaires as $partenaire)
                                     <tr style="font-size:13px">
                                         <th scope="row"></th>
                                         <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenaire->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
@@ -45,9 +42,9 @@ $categorie = App\Models\Categorie::first();
                                                 <a href="#" class="btn btn-success m-1" data-toggle="modal" data-target="#valider{{$partenaire->id}}">Valider </a>
                                                 {{-- <a href="{{ route('admin.partenaire_form', [$partenaire->uuid , 'close'])}}"
                                                 title="ajouter information"><i style="font-size : 20px ; margin-right : 5px" class="fa fa-edit" aria-hidden="true"> </i> </a>--}}
-                                                <form action="" method="POST">
+                                                <form action="{{route('validation_delete') }}" method="POST">
                                                     @csrf
-                                                    <input type="hidden" name="id" value='{{$partenaire->id}}' />
+                                                    <input type="hidden" name="partenariat_id" value='{{$partenaire->id}}' />
                                                     <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')" style="margin-left:10px; border:0px" name="submit">
                                                         <i style="color:red" class=" fa fa-trash"></i>
                                                     </button>
@@ -60,6 +57,7 @@ $categorie = App\Models\Categorie::first();
                                             <div class="modal-content">
                                                 <form action="{{route('validation_partner', [$partenaire->id])}}" method="post" enctype='multipart/form-data'>
                                                     @csrf
+                                                    <input type="hidden" name="partenariat_id" value="{{$partenaire->id}}">
                                                     <div class="container mb-5">
                                                         <h2 class="text-center">
                                                             <img src="{{asset($partenaire->logo)}}" class="img-fluid" style="width:20%" alt="">
@@ -73,8 +71,8 @@ $categorie = App\Models\Categorie::first();
                                                         </div>
                                                         <div class="form-group col-sm-6">
                                                             <label for="">Catégorie de la convention</label>
-                                                            <select class="form-control custom-select" required name="categorie">
-                                                                <option selected value="" name="categorie">----
+                                                            <select class="form-control custom-select" required name="categorie_id">
+                                                                <option selected value="" name="categorie_id">----
                                                                     Selectionnez ---</option>
                                                                 @foreach($categories as $categorie)
                                                                 <option {{ ($categorie->id == $partenaire->categorie_id) ? 'selected' : '' }} value="{{$categorie->id}}">
@@ -112,13 +110,13 @@ $categorie = App\Models\Categorie::first();
                                             </div>
                                         </div>
                                     </div>
-
+                                @endforeach
+                                @if(!is_object($partenaires[0]))
                                     <tr>
                                         <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
                                     </tr>
-
-
                                 </tbody>
+                                @endif
                             </table>
                         </div>
 

@@ -9,11 +9,5 @@ class Validation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nom_convention',
-        'date_debut',
-        'date_fin',
-        'file_convention',
-        'image_convention',
-    ];
+    protected $guarded = [];
 }
