@@ -152,9 +152,7 @@ class AdminController extends Controller
     public function validation_encours()
     {
         $categories = Categorie::all();
-        $partenaires = DB::table('demandepartenariats')->select('*')
-            ->where('can_be_partner', 'OUI')
-            ->where('drive', '!=', null)
+        $partenaires = Demandepartenariat::where('can_be_partner', 'OUI')
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         return view('admin.validation.encours', compact('partenaires', 'categories'));
@@ -162,14 +160,13 @@ class AdminController extends Controller
 
     public function validation_store(Request $request)
     {
-
         $request->validate([
-            'nom_convention' => ['required'],
+            'nom_convention' => 'required',
             'categorie_id' => 'required',
-            'date_debut' => ['required'],
-            'date_fin' => ['required'],
-            'file_convention' => ['required'],
-            'image_convention' => ['required'],
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date',
+            'file_convention' => 'required',
+            'image_convention' => 'required',
         ]);
         $partenaire = new Validation();
         $partenaire->nom_convention = $request->nom_convention;
@@ -188,8 +185,18 @@ class AdminController extends Controller
             $doc_lm->move(public_path("docs/images/lms"), $lm_name);
             $partenaire->image_convention = $lm_name;
         }
+        $partenaire->partenariat_id = $request->partenariat_id ; 
+        $partenaire->categorie_id = $request->categorie_id ; 
         $partenaire->save();
-        return redirect()->route("admin.validation.partenaire")->with("partenariat confirmé!");
+        return redirect()->route("admin.validation.partenaire")->with("success" , "partenariat confirmé!");
+    }
+
+    public function validation_delete(Request $request)
+    {
+           $partenairiat = Demandepartenariat::find($request->partenariat_id);
+            $partenairiat->can_be_partner = null;
+            $partenairiat->save();
+        return back()->with("success",  "demande supprimée avec succès!");
     }
 
     public function partenaire()
@@ -247,6 +254,8 @@ class AdminController extends Controller
         $categorie = Categorie::create($request->all());
         return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créer");
     }
+
+
 
     public function categorie_delete(Request $request)
     {
