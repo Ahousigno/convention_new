@@ -11,7 +11,7 @@ $partenariat = App\Models\Demandepartenariat::first();
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Liste des demandes en attentes</div>
+                    <div class="card-header">Liste des demandes Réjétée</div>
                     <div class="card-body">
 
                         <br /><br />
@@ -45,10 +45,10 @@ $partenariat = App\Models\Demandepartenariat::first();
                                                 <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}" title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
                                                     </i> </a>
 
-                                                <form action="{{route('admin.demande_attentes_delete', $partenariat->id)}}" method="post">
+                                                <form action="{{route('admin.rejetee_delete')}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value='{{$partenariat->id}}' />
-                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer de façon définitive ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
+                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
                                                         <i style="color:red" class=" fa fa-trash">
                                                         </i>
                                                     </button>

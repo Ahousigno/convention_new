@@ -44,6 +44,7 @@ class AdminController extends Controller
         if($request->can_be_partner == 'NON'){
             $demande = Demandepartenariat::find($request->id);
             $demande->reject = 1 ; 
+            $demande->can_be_partner = 'NON';
             $demande->motif = $request->motif ; 
             Mail::send(new SendMotifMail($request->all()));
             $demande->update();
@@ -89,10 +90,25 @@ class AdminController extends Controller
 
         return back()->with("success" , "lien du drive à bien été envoyé !");
     }
-    public function demande_attente_delete(Demandepartenariat $partenariat)
+    public function demande_attente_delete(Request $request)
     {
-        $partenariat->delete();
-        return view('admin.partenariat.demande_attente');
+        $partenariat = Demandepartenariat::find($request->id);
+        Demandepartenariat::destroy($partenariat->id);
+        return back()->with("success" , "cette demande de partenariat a été definitivement supprimé");
+    }
+
+    public function demande_rejetee()
+    {
+        $partenariats = Demandepartenariat::where('can_be_partner' , 'NON')->get();
+        return view('admin.rejetee.demande_rejetee' , compact('partenariats'));
+    }
+
+    public function rejetee_delete(Request $request)
+    {
+       $rejetee =  Demandepartenariat::find($request->id);
+       $rejetee->can_be_partner = null ; 
+       $rejetee->save();
+       return back()->with("success" , "demande de partenariat a bien été supprimé !");
     }
 
     public function motif_modal(Request $request)
@@ -271,9 +287,7 @@ class AdminController extends Controller
 
     public function article_base()
     {
-        $articles = DB::table('articles')->select('*')
-            ->orderBy('created_at', 'desc')
-            ->paginate('10');
+        $articles = Article::orderBy('created_at', 'desc')->paginate('10');
         return view('admin.article.base', compact('articles'));
     }
     public function article_add()
@@ -293,34 +307,33 @@ class AdminController extends Controller
         $article->ordre = $request->ordre;
         $article->article = $request->article;
         $article->save();
-        return view('admin.article.base')->with("success", "article ajouté");
+        return redirect(route('admin.article.base'))->with("success", "article ajouté");
     }
 
     public function article_edit($id)
     {
         $article = Article::find($id);
-        return view('admin.article.base', compact('article'));
+        return view('admin.article.edit', compact('article'));
     }
-    public function article_update(Request $request)
+    public function article_update(Request $request , int $id)
     {
         $request->validate([
             'name' => ['required'],
             'ordre' => ['required'],
             'article' => ['required'],
         ]);
-        $article =  new Article();
+        $article =  Article::find($id);
         $article->name = $request->name;
         $article->ordre = $request->ordre;
         $article->article = $request->article;
         $article->update();
-        return view('admin.article.base')->with("success", "article mis à jour");
+        return view('admin.article.edit' , compact('article'))->with("success", "article mis à jour");
     }
 
-    public function article_delete(Article $article)
+    public function article_delete(Request $request)
     {
-
-        $article->delete();
-
+        $article = Article::find($request->id);
+        Article::destroy($article->id);
         return back()->with("success",  "article supprimé avec succès!");
     }
 }

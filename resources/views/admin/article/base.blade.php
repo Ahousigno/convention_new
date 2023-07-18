@@ -26,9 +26,9 @@
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-                                    @forelse($articles as $article)
+                                    @forelse($articles as $i => $article)
                                     <tr style="font-size:13px">
-                                        <td>{{$i++}}</td>
+                                        <td>{{$i+1}}</td>
                                         <td>{{$article->name}}</td>
                                         <td>article {{$article->ordre}}</td>
 

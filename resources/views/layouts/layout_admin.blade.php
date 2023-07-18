@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.demande_rejetee')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-times"></i>
                                 <p>Demande Réjétée</p>
                             </a>
