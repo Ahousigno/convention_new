@@ -185,17 +185,17 @@
                 </div>
             </div><br>
 
-           <div class="container">
-                
+            <div class="container">
+
                 @if(session('success'))
-                    <div class="alert alert-success">
-                         {{session('success')}}
-                    </div>
+                <div class="alert alert-success">
+                    {{session('success')}}
+                </div>
                 @endif
                 @if(session('error'))
-                    <div class="alert alert-danger">
+                <div class="alert alert-danger">
                     {{session('error')}}
-                    </div>
+                </div>
                 @endif
 
             </div>

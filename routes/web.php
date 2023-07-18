@@ -53,6 +53,7 @@ Route::get('/demande_convention', [ConventionController::class, 'show_demande_co
 Route::get('/validation', [AdminController::class, 'validation_encours'])->name('admin.validation.encours');
 Route::post('/validation', [AdminController::class, 'validation_store'])->name('validation_partner');
 Route::post('/validation_delete', [AdminController::class, 'validation_delete'])->name('validation_delete');
+Route::get('/information', [AdminController::class, 'infos_partenaire'])->name('admin.validation.infos_partenaire');
 
 
 //partie partenaire

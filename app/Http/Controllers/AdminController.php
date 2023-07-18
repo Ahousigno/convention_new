@@ -185,17 +185,17 @@ class AdminController extends Controller
             $doc_lm->move(public_path("docs/images/lms"), $lm_name);
             $partenaire->image_convention = $lm_name;
         }
-        $partenaire->partenariat_id = $request->partenariat_id ; 
-        $partenaire->categorie_id = $request->categorie_id ; 
+        $partenaire->partenariat_id = $request->partenariat_id;
+        $partenaire->categorie_id = $request->categorie_id;
         $partenaire->save();
-        return redirect()->route("admin.validation.partenaire")->with("success" , "partenariat confirmé!");
+        return redirect()->route("admin.validation.partenaire")->with("success", "partenariat confirmé!");
     }
 
     public function validation_delete(Request $request)
     {
-           $partenairiat = Demandepartenariat::find($request->partenariat_id);
-            $partenairiat->can_be_partner = null;
-            $partenairiat->save();
+        $partenairiat = Demandepartenariat::find($request->partenariat_id);
+        $partenairiat->can_be_partner = null;
+        $partenairiat->save();
         return back()->with("success",  "demande supprimée avec succès!");
     }
 
@@ -206,6 +206,12 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         return view('admin.validation.partenaire', compact('validations'));
+    }
+    //information sur les partenariats
+
+    public function infos_partenaire()
+    {
+        return view('admin.validation.infos_partenaire');
     }
 
 
