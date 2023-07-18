@@ -29,7 +29,7 @@ class AdminController extends Controller
 
     public function demande_attente()
     {
-        $partenariats = Demandepartenariat::paginate('10')->where('can_be_partner' , null)->sortByDesc('created_at')->all();
+        $partenariats = Demandepartenariat::paginate('10')->where('can_be_partner', null)->sortByDesc('created_at')->all();
         return view('admin.partenariat.demande_attente', compact('partenariats'));
     }
 
@@ -41,13 +41,13 @@ class AdminController extends Controller
 
     public function edit_update(Request $request)
     {
-        if($request->can_be_partner == 'NON'){
+        if ($request->can_be_partner == 'NON') {
             $demande = Demandepartenariat::find($request->id);
-            $demande->reject = 1 ; 
-            $demande->motif = $request->motif ; 
+            $demande->reject = 1;
+            $demande->motif = $request->motif;
             Mail::send(new SendMotifMail($request->all()));
             $demande->update();
-            return back()->with('success' , "Démande de rejet a bien été transmi") ;
+            return back()->with('success', "Demande de rejet a bien été transmi");
         }
         $request->validate([
             'nom' => 'required',
@@ -87,7 +87,7 @@ class AdminController extends Controller
 
         Mail::send(new SendDriveMail($request->all()));
 
-        return back()->with("success" , "lien du drive à bien été envoyé !");
+        return back()->with("success", "lien du drive à bien été envoyé !");
     }
     public function demande_attente_delete(Demandepartenariat $partenariat)
     {
@@ -97,7 +97,7 @@ class AdminController extends Controller
 
     public function motif_modal(Request $request)
     {
-        
+
         $this->validate($request, [
             'motif_rejet' => ['required', 'max:600']
         ]);
@@ -157,7 +157,7 @@ class AdminController extends Controller
             ->where('drive', '!=', null)
             ->orderBy('created_at', 'desc')
             ->paginate('10');
-        return view('admin.validation.encours', compact('partenaires' , 'categories'));
+        return view('admin.validation.encours', compact('partenaires', 'categories'));
     }
 
     public function validation_store(Request $request)
@@ -224,11 +224,11 @@ class AdminController extends Controller
     }
 
     public function categorie_edit($id = null)
-    { 
-        $categorie = null ; 
-        if($id == null){
-            $categorie = new categorie(); 
-        }else{
+    {
+        $categorie = null;
+        if ($id == null) {
+            $categorie = new categorie();
+        } else {
             $categorie = Categorie::find($id);
         }
         return view('admin.categorie.edit', compact('categorie'));
@@ -238,22 +238,21 @@ class AdminController extends Controller
         $request->validate([
             'libelle_categorie' => ['required'],
         ]);
-        if($request->id){
+        if ($request->id) {
             $categorie = Categorie::find($request->id);
-            $categorie->libelle_categorie = $request->libelle_categorie ; 
+            $categorie->libelle_categorie = $request->libelle_categorie;
             $categorie->update();
-            return view('admin.categorie.edit' , compact('categorie'))->with("success" , "catégorie bien modifié");
+            return view('admin.categorie.edit', compact('categorie'))->with("success", "catégorie bien modifié");
         }
-       $categorie = Categorie::create($request->all());
-       return redirect(route('admin.categorie.create'))->with("success" , "Categorie bien créer");
-
+        $categorie = Categorie::create($request->all());
+        return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créer");
     }
 
     public function categorie_delete(Request $request)
     {
-           $categorie = Categorie::find($request->id);
-            Categorie::destroy($categorie->id);
-          $categorie->save();
+        $categorie = Categorie::find($request->id);
+        Categorie::destroy($categorie->id);
+        $categorie->save();
         return back()->with("success",  "categorie supprimée avec succès!");
     }
 
