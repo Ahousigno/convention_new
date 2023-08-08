@@ -1,9 +1,6 @@
 @extends('layouts.layout_admin')
 @section('content')
 <!-- Main content -->
-<?php
-$partenariat = App\Models\Demandepartenariat::first();
-?>
 <section class="content">
     <div class="container-fluid">
         <!-- Info boxes -->
