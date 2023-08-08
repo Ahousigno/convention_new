@@ -1,6 +1,9 @@
 @extends('layouts.layout_admin')
 @section('content')
 <!-- Main content -->
+<?php
+$partenariat = App\Models\Demandepartenariat::first();
+?>
 <section class="content">
     <div class="container-fluid">
         <!-- Info boxes -->
@@ -8,11 +11,9 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Liste des Partenaires</div>
+                    <div class="card-header">Liste des demandes Réjétée</div>
                     <div class="card-body">
-                        <?php
-                        $partenariat = App\Models\Demandepartenariat::first();
-                        ?>
+
                         <br /><br />
                         <div class="table-responsive">
                             <table id="config-table" class="table">
@@ -21,40 +22,50 @@
                                         <th>N°</th>
                                         <th>Logo</th>
                                         <th>Structure</th>
+                                        <th>Nom et prénoms du point focal</th>
+                                        <th>Nom et prénoms du responsable</th>
+                                        <th>Contact</th>
+                                        <th>E-Mail</th>
                                         <th>Action</th>
-                                        <th>Imprimer la Convention</th>
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-
+                                    @forelse($partenariats as $partenariat)
                                     <tr style="font-size:13px">
-                                        <th scope="row"></th>
+                                        <th scope="row">{{$loop->index + 1}}</th>
                                         <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
                                         <td>{{$partenariat->libelle_structure}}</td>
+                                        <td>{{$partenariat->nom}}</td>
+                                        <td>{{$partenariat->prenoms}}</td>
+                                        <td>{{$partenariat->contact_tel}}</td>
+                                        <td>{{$partenariat->email}}</td>
 
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
+                                                <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}" title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
+                                                    </i> </a>
 
-                                                <a href="{{route('admin.validation.infos_partenaire')}}">
-                                                    en savoir plus <i style="color:blue; font-size:10px" class=" fa fa-plus">
-                                                    </i>
-                                                </a>
-
+                                                <form action="{{route('admin.rejetee_delete')}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value='{{$partenariat->id}}' />
+                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
+                                                        <i style="color:red" class=" fa fa-trash">
+                                                        </i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
-                                        <td>
-                                            <a target="_blank" title="Imprimer la Convention" style="padding-left:30px" href="">
-                                                convention
-                                            </a>
-                                        </td>
                                     </tr>
-
+                                    @empty
                                     <tr>
                                         <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
                                     </tr>
-
+                                    @endforelse
                                 </tbody>
                             </table>
+                            <div class="mt-3">
+
+                            </div>
                         </div>
 
                     </div>

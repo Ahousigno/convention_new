@@ -16,7 +16,7 @@
                 @endif
                 <div class="card ">
                     <div class="card-header">
-                        <h3 class="card-title">Edition de l'Article</h3>
+                        <h3 class="card-title">Création d'un Article</h3>
                     </div>
 
                     <form action="{{$add_update}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data"

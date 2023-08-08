@@ -6,7 +6,6 @@
         </div>
     </div>
 </div>
-
 <script>
     let form = document.querySelector("#edit_demande");
     form.addEventListener("submit", function(e) {

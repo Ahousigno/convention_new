@@ -48,7 +48,7 @@ $partenariat = App\Models\Demandepartenariat::first();
                                                 <form action="{{route('admin.demande_attentes_delete', $partenariat->id)}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value='{{$partenariat->id}}' />
-                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
+                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer de façon définitive ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
                                                         <i style="color:red" class=" fa fa-trash">
                                                         </i>
                                                     </button>

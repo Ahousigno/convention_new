@@ -31,10 +31,10 @@
             background-color: rgba(18, 18, 18, 0.5);
         }
 
-        @media screen and (max-width: 600px; ) {
+        @media screen and (max-width: 600px) {
             body {
                 background-size: cover;
-                : fixed
+                /* : fixed */
             }
         }
 

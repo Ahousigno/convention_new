@@ -44,10 +44,11 @@ class AdminController extends Controller
         if ($request->can_be_partner == 'NON') {
             $demande = Demandepartenariat::find($request->id);
             $demande->reject = 1;
+            $demande->can_be_partner = 'NON';
             $demande->motif = $request->motif;
             Mail::send(new SendMotifMail($request->all()));
             $demande->update();
-            return back()->with('success', "Demande de rejet a bien été transmi");
+            return back()->with('success', "Demande rejetée");
         }
         $request->validate([
             'nom' => 'required',
@@ -87,67 +88,82 @@ class AdminController extends Controller
 
         Mail::send(new SendDriveMail($request->all()));
 
-        return back()->with("success", "lien du drive à bien été envoyé !");
+        return back()->with("success", "lien envoyé au futur partenaire!");
     }
-    public function demande_attente_delete(Demandepartenariat $partenariat)
+    public function demande_attente_delete(Request $request)
     {
-        $partenariat->delete();
-        return view('admin.partenariat.demande_attente');
+        $partenariat = Demandepartenariat::find($request->id);
+        Demandepartenariat::destroy($partenariat->id);
+        return back()->with("success", "cette demande de partenariat a été definitivement supprimé");
     }
 
-    public function motif_modal(Request $request)
+    public function demande_rejetee()
     {
-
-        $this->validate($request, [
-            'motif_rejet' => ['required', 'max:600']
-        ]);
-        $partenariat = Demandepartenariat::first();
-        // $partenariat->can_be_partner == 'NON';
-        $partenariat->motif_rejet = $request->motif_rejet;
-
-        $recipient = [$partenariat->email]; //Emails des destinataires
-        $mail_data = [
-            'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
-            'fromEmail' => Auth::user()['email'],
-            'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
-            "subject" => "Validation de partenariat",
-            "motifRejet" => $request->motif_rejet,
-        ];
-        Mail::send('email.rejet', $mail_data, function ($message) use ($mail_data) {
-            $message->to($mail_data['recipient'])
-                ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                ->subject($mail_data['subject']);
-        });
-        $partenariat->update();
-        return back()->with("success",  "Demande rejetée!");
+        $partenariats = Demandepartenariat::where('can_be_partner', 'NON')->get();
+        return view('admin.rejetee.demande_rejetee', compact('partenariats'));
     }
 
-    public function drive_modal(Request $request)
+    public function rejetee_delete(Request $request)
     {
-        $this->validate($request, [
-            'drive' => ['required', 'max:600']
-        ]);
-        $partenariat = Demandepartenariat::first();
-        $partenariat->can_be_partner == 'OUI';
-        $partenariat->drive = $request->drive;
-
-        $recipient = [$partenariat->email]; //Emails des destinataires
-        $mail_data = [
-            'recipient' => $recipient, //
-            'fromEmail' => Auth::user()['email'],
-            'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
-            "subject" => "Validation de partenariat",
-            "motifvalide" => $request->drive,
-        ];
-        Mail::send('email.valide', $mail_data, function ($message) use ($mail_data) {
-            $message->to($mail_data['recipient'])
-                ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                ->subject($mail_data['subject']);
-        });
-
-        $partenariat->update();
-        return view('admin.validation.encours')->with("success", "demande acceptée!");
+        $rejetee =  Demandepartenariat::find($request->id);
+        $rejetee->can_be_partner = null;
+        $rejetee->save();
+        return back()->with("success", "demande de partenariat a bien été supprimé !");
     }
+
+    // public function motif_modal(Request $request)
+    // {
+
+    //     $this->validate($request, [
+    //         'motif_rejet' => ['required', 'max:600']
+    //     ]);
+    //     $partenariat = Demandepartenariat::first();
+    //     // $partenariat->can_be_partner == 'NON';
+    //     $partenariat->motif_rejet = $request->motif_rejet;
+
+    //     $recipient = [$partenariat->email]; //Emails des destinataires
+    //     $mail_data = [
+    //         'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
+    //         'fromEmail' => Auth::user()['email'],
+    //         'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
+    //         "subject" => "Validation de partenariat",
+    //         "motifRejet" => $request->motif_rejet,
+    //     ];
+    //     Mail::send('email.rejet', $mail_data, function ($message) use ($mail_data) {
+    //         $message->to($mail_data['recipient'])
+    //             ->from($mail_data['fromEmail'], $mail_data['fromName'])
+    //             ->subject($mail_data['subject']);
+    //     });
+    //     $partenariat->update();
+    //     return back()->with("success",  "Demande rejetée!");
+    // }
+
+    // public function drive_modal(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'drive' => ['required', 'max:600']
+    //     ]);
+    //     $partenariat = Demandepartenariat::first();
+    //     $partenariat->can_be_partner == 'OUI';
+    //     $partenariat->drive = $request->drive;
+
+    //     $recipient = [$partenariat->email]; //Emails des destinataires
+    //     $mail_data = [
+    //         'recipient' => $recipient, //
+    //         'fromEmail' => Auth::user()['email'],
+    //         'fromName' => Auth::user()['name'] . ' ' . Auth::user()['pname'],
+    //         "subject" => "Validation de partenariat",
+    //         "motifvalide" => $request->drive,
+    //     ];
+    //     Mail::send('email.valide', $mail_data, function ($message) use ($mail_data) {
+    //         $message->to($mail_data['recipient'])
+    //             ->from($mail_data['fromEmail'], $mail_data['fromName'])
+    //             ->subject($mail_data['subject']);
+    //     });
+
+    //     $partenariat->update();
+    //     return view('admin.validation.encours')->with("success", "demande acceptée!");
+    // }
     //partie validation
     public function validation_encours()
     {
@@ -261,8 +277,6 @@ class AdminController extends Controller
         return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créer");
     }
 
-
-
     public function categorie_delete(Request $request)
     {
         $categorie = Categorie::find($request->id);
@@ -276,9 +290,7 @@ class AdminController extends Controller
 
     public function article_base()
     {
-        $articles = DB::table('articles')->select('*')
-            ->orderBy('created_at', 'desc')
-            ->paginate('10');
+        $articles = Article::orderBy('created_at', 'desc')->paginate('10');
         return view('admin.article.base', compact('articles'));
     }
     public function article_add()
@@ -298,34 +310,33 @@ class AdminController extends Controller
         $article->ordre = $request->ordre;
         $article->article = $request->article;
         $article->save();
-        return view('admin.article.base')->with("success", "article ajouté");
+        return redirect(route('admin.article.base'))->with("success", "article ajouté");
     }
 
     public function article_edit($id)
     {
         $article = Article::find($id);
-        return view('admin.article.base', compact('article'));
+        return view('admin.article.edit', compact('article'));
     }
-    public function article_update(Request $request)
+    public function article_update(Request $request, int $id)
     {
         $request->validate([
             'name' => ['required'],
             'ordre' => ['required'],
             'article' => ['required'],
         ]);
-        $article =  new Article();
+        $article =  Article::find($id);
         $article->name = $request->name;
         $article->ordre = $request->ordre;
         $article->article = $request->article;
         $article->update();
-        return view('admin.article.base')->with("success", "article mis à jour");
+        return back()->with("success", "article mis à jour");
     }
 
-    public function article_delete(Article $article)
+    public function article_delete(Request $request)
     {
-
-        $article->delete();
-
+        $article = Article::find($request->id);
+        Article::destroy($article->id);
         return back()->with("success",  "article supprimé avec succès!");
     }
 }

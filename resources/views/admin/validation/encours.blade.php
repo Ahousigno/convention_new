@@ -27,7 +27,7 @@ $categorie = App\Models\Categorie::first();
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-                                @foreach($partenaires as $partenaire)
+                                    @foreach($partenaires as $partenaire)
                                     <tr style="font-size:13px">
                                         <th scope="row"></th>
                                         <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenaire->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
@@ -110,8 +110,8 @@ $categorie = App\Models\Categorie::first();
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                                @if(!is_object($partenaires[0]))
+                                    @endforeach
+                                    @if(!is_object($partenaires[0]))
                                     <tr>
                                         <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
                                     </tr>

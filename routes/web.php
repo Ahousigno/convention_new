@@ -19,6 +19,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.accueil');
 });
+
+// Route::get('/accueil', function () {
+//     return view('client.accueil');
+// })->middleware(['auth'])->name('client.accueil');
+
+// require __DIR__ . '/auth.php';
+
+
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/accueil', [ClientController::class, 'index'])->name('client.accueil');
+// });
+
+
+
 Route::get('/accueil', [ClientController::class, 'index'])->name('client.accueil');
 Route::get('/presentation', [ClientController::class, 'presentation'])->name('client.presentation');
 Route::get('/partenariat', [ClientController::class, 'demande_partenariat'])->name('client.partenariat');
@@ -60,6 +74,11 @@ Route::get('/information', [AdminController::class, 'infos_partenaire'])->name('
 Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.validation.partenaire');
 
 
+//partie rejetee
+Route::get('/demande-rejetee', [AdminController::class, 'demande_rejetee'])->name('admin.demande_rejetee');
+Route::post('/rejetee_delete', [AdminController::class, 'rejetee_delete'])->name('admin.rejetee_delete');
+
+
 //categorie
 Route::get('/categorie', [AdminController::class, 'categorie'])->name('admin.categorie.create');
 Route::get('/categorie_create', [AdminController::class, 'categorie_edit'])->name('categorie_create');
@@ -74,5 +93,5 @@ Route::get('/article_base', [AdminController::class, 'article_base'])->name('adm
 Route::get('/article_add', [AdminController::class, 'article_add'])->name('admin.article.add');
 Route::post('/article_save', [AdminController::class, 'article_save'])->name('article_save');
 Route::get('/article_edit/{id}', [AdminController::class, 'article_edit'])->name('admin.article.edit');
-Route::post('/article_edit/{id}', [AdminController::class, 'article_update'])->name('admin.article_update');
+Route::put('/article_edit/{id}', [AdminController::class, 'article_update'])->name('admin.article_update');
 Route::post('/article_delete', [AdminController::class, 'article_delete'])->name('admin.article_delete');
