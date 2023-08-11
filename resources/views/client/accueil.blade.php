@@ -24,7 +24,8 @@
                 <li class="col-12 col-md-6 col-lg-3">
                     <a href="">
                         <div class="cnt-block equal-hight" style="height: 200px;" id="partenaire">
-                            <figure><img src="{{asset('client/assets/img/missions/partenariat_dem.png')}}" class="img-responsive" alt=""></figure>
+                            <figure><img src="{{asset('client/assets/img/missions/partenariat_dem.png')}}"
+                                    class="img-responsive" alt=""></figure>
                             <p class="partenariat">Demander vos partenariats</p>
                         </div>
                     </a>
@@ -32,7 +33,8 @@
                 <li class="col-12 col-md-6 col-lg-3">
                     <a href="">
                         <div class="cnt-block equal-hight" style="height: 200px;" id="partenaire">
-                            <figure><img src="{{asset('client/assets/img/missions/partenariat_dem.png')}}" class="img-responsive" alt=""></figure>
+                            <figure><img src="{{asset('client/assets/img/missions/partenariat_dem.png')}}"
+                                    class="img-responsive" alt=""></figure>
                             <p>Demander vos conventions</p>
                         </div>
                     </a>
@@ -40,7 +42,8 @@
                 <li class="col-12 col-md-6 col-lg-3">
                     <a href="">
                         <div class="cnt-block equal-hight" style="height: 200px;" id="partenaire">
-                            <figure><img src="{{asset('client/assets/img/missions/gestion.png')}}" class="img-responsive" alt=""></figure>
+                            <figure><img src="{{asset('client/assets/img/missions/gestion.png')}}"
+                                    class="img-responsive" alt=""></figure>
                             <p>Gerer les partenariats</p>
                         </div>
                     </a>
@@ -48,7 +51,8 @@
                 <li class="col-12 col-md-6 col-lg-3">
                     <a href="">
                         <div class="cnt-block equal-hight" style="height: 200px;" id="partenaire">
-                            <figure><img src="{{asset('client/assets/img/missions/gestion.png')}}" class="img-responsive" alt=""></figure>
+                            <figure><img src="{{asset('client/assets/img/missions/gestion.png')}}"
+                                    class="img-responsive" alt=""></figure>
                             <p>Gerer les conventions</p>
                         </div>
                     </a>
@@ -64,12 +68,14 @@
     <h2 class="part">Nos partenaires</h2>
     <div class="partners-container">
         <ul class="partners-list">
-
+            @foreach($partenariats as $partenariat)
             <li>
                 <a href="#">
-                    <img src="{{asset('client/assets/img/missions/logo-mtn.png')}}" alt="Nom du partenaire 3">
+                    <img src="{{asset('/docs/images/lms/'. $partenariat->logo)}}" alt="Description de l'image"
+                        width="50%">
                 </a>
             </li>
+            @endforeach
         </ul>
 
         <a href="{{route('all_partenariats')}}" class="btn btn-primary" style="color: white; text-decoration: none">Voir
@@ -79,18 +85,18 @@
 </section>
 
 <style>
-    .btn-primary {
-        background-color: #92278f;
-        border-color: #92278f;
-    }
+.btn-primary {
+    background-color: #92278f;
+    border-color: #92278f;
+}
 
-    .btn-primary:hover {
-        color: white;
-        background-color: rgb(18, 166, 80);
-        ;
-        border-color: rgb(18, 166, 80);
-        ;
-    }
+.btn-primary:hover {
+    color: white;
+    background-color: rgb(18, 166, 80);
+    ;
+    border-color: rgb(18, 166, 80);
+    ;
+}
 </style>
 
 

@@ -137,87 +137,28 @@
         @yield("contenu")
     </main>
 
-    <footer id="rs-footer" class="rs-footer">
-        <div class="footer-top mb-0 pb-3">
+    <!-- Footer -->
+    <!-- <footer>
+        <div class="copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="widget footer_widget">
-                            <h5 class="footer-title">Administration</h5>
-                            <ul>
-                                <li class="text-white"><i class="fa fa-phone mr-2"></i>(+225) 01-42-22-22-11 /
-                                    27-22-51-51-47</li>
-                                <li class="text-white"><i class="fa fa-envelope mr-2 mt-3"></i>courrier@uvci.edu.ci</li>
-                                <li class="text-white"><i class="fa fa-paste mr-2 mt-3"></i>28 BP 536 Abidjan 28 - Côte
-                                    d'Ivoire</li>
-                                <li class="text-white"><i class="fa fa-map-marker mr-2 mt-3 "></i>Abidjan Cocody
-                                    Deux-Plateaux, rue K4<br>(GPS: 5.357177; -4.001287)</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="widget footer_widget mb-3">
-                            <h5 class="footer-title">Scolarité</h5>
-                            <ul>
-                                <li class="text-white"><i class="fa fa-phone mr-2"></i>(+225) 01-53-66-66-06 /
-                                    01-72-51-30-32</li>
-                                <li class="text-white"><i class="fa fa-envelope mr-2 mt-3"></i>scolarite@uvci.edu.ci
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="widget mt-0">
-                            <h5 class="footer-title">Pédagogie</h5>
-                            <ul>
-                                <li class="text-white"><i class="fa fa-phone mr-2"></i>(+225) 01-42-05-95-70 </li>
-                                <li class="text-white"><i class="fa fa-envelope mr-2 mt-3"></i>pedagogie@uvci.edu.ci
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="widget footer_widget">
-                            <h5 class="footer-title">Liens Utiles</h5>
-                            <ul>
-                                <li><a href="https://uvci.edu.ci/" target=_blank>Portail Uvci</a></li>
-                                <li><a href="http://scolarite.uvci.edu.ci/" target=_blank>Scolarité</a></li>
-                                <li><a href="http://campus.uvci.edu.ci/" target=_blank>Campus</a></li>
-                                <li><a href="https://biblio.uvci.edu.ci/" target=_blank>Bibliothèque Virtuelle</a></li>
-                                <li><a href="https://www.enseignement.gouv.ci/" target=_blank>Site du MESRS</a></li>
-                            </ul>
+                    <div class="col-xs-12">
+                        <div style="text-align:center" class="copyright-content">
+                            <p style="font-size:12px; padding-top:25px">Copyright © 2020 -- UVCI tous droits réservés. <i class="fa fa-copyright" aria-hidden="true"></i>
+							
+							 | <a href="mailto:colloquevirtuel@uvci.edu.ci">colloquevirtuel@uvci.edu.ci</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom pt-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9 col-md-12 ">
-                        <span class="text-white slogan-2">&copy; 2022 - Mon université avec moi, partout et à tout
-                            moment.</span>
-                    </div>
-                    <div class="col-lg-3 col-md-12 text-center ">
-                        <ul class="list-inline d-flex justify-content-center">
-                            <li><a href="https://www.facebook.com/uvciv/" target=_blank class="btn-link"><i
-                                        class="fa fa-facebook mr-3"></i></a></li>
-                            <li><a href="https://twitter.com/uvciv" target=_blank class="btn-link"><i
-                                        class="fa fa-twitter mr-3 "></i></a></li>
-                            <li><a href="https://www.linkedin.com/company/universit%C3%A9-virtuelle-de-c%C3%B4te-d-ivoire/"
-                                    target=_blank class="btn-link"><i class="fa fa-linkedin mr-3"></i></a></li>
-                            <li><a href="https://www.youtube.com/channel/UC6NIaSns4ATHrYtv0bJ0uow" target=_blank
-                                    class="btn-link"><i class="fa fa-youtube mr-3"></i></a></li>
-                            <li><a href="http://uvci.tv/" target=_blank class="btn-link"><i
-                                        class="fa fa-television "></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </footer> -->
+    <!-- Footer -->
 
-
+    <div class="footer-unique">
+        <iframe name="footer-uvci" src="https://www.uvci.edu.ci/footer-uvci/index-fr.php" title="footer-uvci"
+            style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
@@ -243,9 +184,9 @@
     </script>
 
     <script type="text/javascript">
-        $(".select2").select2({
-            dropdownParent: $("#exampleModal")
-        });
+    $(".select2").select2({
+        dropdownParent: $("#exampleModal")
+    });
     </script>
 
 
@@ -254,27 +195,27 @@
 
     <?php if (session('error')) : ?>
     <script type="text/javascript">
-        Swal.fire({
-            title: 'Oups !',
-            text: '<?php echo session('error'); ?>',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 2500
-            // confirmButtonText: 'Retour'
-        })
+    Swal.fire({
+        title: 'Oups !',
+        text: '<?php echo session('error'); ?>',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2500
+        // confirmButtonText: 'Retour'
+    })
     </script>
     <?php endif; ?>
 
     <?php if (session('success') || !empty($success)) : ?>
     <script type="text/javascript">
-        Swal.fire({
-            title: 'Succès !',
-            text: '<?php echo session('success') ?? $success; ?>',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 4000
-            // confirmButtonText: 'Retour'
-        })
+    Swal.fire({
+        title: 'Succès !',
+        text: '<?php echo session('success') ?? $success; ?>',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 4000
+        // confirmButtonText: 'Retour'
+    })
     </script>
     <?php endif; ?>
 

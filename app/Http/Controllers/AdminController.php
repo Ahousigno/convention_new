@@ -209,7 +209,7 @@ class AdminController extends Controller
     }
     public function partenaire()
     {
-        $partenariats  = Validation::where('validated', '1')
+        $partenariats  = Validation::where('validated', '0')
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         $demande = new Demandepartenariat();
@@ -230,16 +230,13 @@ class AdminController extends Controller
 
     //information sur les partenariats
 
-    public function infos_partenaire()
+    public function infos_partenaire($id)
     {
-        $partenaires = DB::table('validations')->select('*');
-        return view('admin.validation.infos_partenaire', compact('partenaires'));
+        $partenaire = Validation::where('id', $id)->first();
+        $demande = new Demandepartenariat();
+        $categorie = new Categorie();
+        return view('admin.validation.infos_partenaire', compact('partenaire', 'demande', 'categorie'));
     }
-    //information sur les partenariats
-
-
-
-
     //categorie
 
     public function categorie()

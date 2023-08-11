@@ -25,7 +25,6 @@
                                             <h4 class="card-title" style="text-align: center;">Fichiers</h4>
                                         </div>
                                     </div>
-                                    @foreach($partenaires as $partenaire)
                                     <div class="card-body">
                                         <div class="text-center">
                                             <div class="user-profile">
@@ -39,7 +38,7 @@
                                                 <h6 class="mb-1" style="font-weight:bold;">Logo:</h6>
                                                 <br>
                                                 <h3 class="d-inline-block">
-                                                    <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}"
+                                                    <img src="{{asset('/docs/images/lms/'.$demande->where('id' , $partenaire->partenariat_id)->first()->logo)}}"
                                                         alt="profile-img" class="rounded-pill avatar-130 img-fluid">
                                                 </h3>
                                             </div>
@@ -56,7 +55,6 @@
 
                                         </div>
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
 
@@ -74,12 +72,14 @@
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Catégorie:</h6>
-                                            <p>{{$categorie->libelle_categorie}}<a href="#" class="text-body"></a>
+                                            <p>{{$categorie->where('id' , $partenaire->categorie_id)->first()->libelle_categorie}}<a
+                                                    href="#" class="text-body"></a>
                                             </p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Contact:</h6>
-                                            <p>{{$partenariat->contact_tel}}<a href="#" class="text-body"></a></p>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->contact_tel}}<a
+                                                    href="#" class="text-body"></a></p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Date de signature:</h6>
@@ -96,37 +96,43 @@
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Nom de la structure:
                                             </h6>
-                                            <p>{{$partenariat->libelle_structure}}<a href="#" class="text-body"></a>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->libelle_structure}}<a
+                                                    href="#" class="text-body"></a>
                                             </p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Nom du responsable:
                                             </h6>
-                                            <p>{{$partenariat->nom}}<a href="#" class="text-body"></a></p>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->nom}}<a
+                                                    href="#" class="text-body"></a></p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Nom du point focal:
                                             </h6>
-                                            <p>{{$partenariat->prenoms}}<a href="#" class="text-body"></a></p>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->prenoms}}<a
+                                                    href="#" class="text-body"></a></p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Email:
                                             </h6>
-                                            <p>{{$partenariat->email}}<a href="#" class="text-body"></a></p>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->email}}<a
+                                                    href="#" class="text-body"></a></p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Situation géographique:
                                             </h6>
-                                            <p>{{$partenariat->situation_geo}}<a href="#" class="text-body"></a></p>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->situation_geo}}<a
+                                                    href="#" class="text-body"></a></p>
                                         </div>
                                         <div class="mt-2">
                                             <h6 class="mb-1" style="font-weight:bold;">Motif:
                                             </h6>
-                                            <p>{{$partenariat->motif}}<a href="#" class="text-body"></a></p>
+                                            <p>{{$demande->where('id' , $partenaire->partenariat_id)->first()->motif}}<a
+                                                    href="#" class="text-body"></a></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        @endsection
+                             @endsection

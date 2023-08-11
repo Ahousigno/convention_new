@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demandepartenariat;
+use App\Models\Validation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
     public function index()
     {
-        return view('client.accueil');
+        // $partenariats = DB::table('demandepartenariats')->select('4')
+        //     ->orderBy('created_at', 'desc');
+        $partenariats = Demandepartenariat::all();
+        return view('client.accueil', compact('partenariats'));
     }
     public function presentation()
     {
@@ -21,14 +26,13 @@ class ClientController extends Controller
 
     public function mediatheque()
     {
-        return view('client.mediatheque');
+        $partenaires = Validation::all();
+        return view('client.mediatheque', compact('partenaires'));
     }
     public function demande_convention()
     {
         return view('client.convention');
     }
-
-
     public function demande_partenariat(Request $request)
     {
         return view('client.partenariat');
@@ -97,6 +101,7 @@ class ClientController extends Controller
 
     public function all_partenariats()
     {
-        return view('client.all_partenariats');
+        $partenariats = Demandepartenariat::all();
+        return view('client.all_partenariats', compact('partenariats'));
     }
 }

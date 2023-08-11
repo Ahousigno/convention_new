@@ -36,7 +36,8 @@
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
 
-                                                <a href="{{route('admin.validation.infos_partenaire')}}">
+                                                <a
+                                                    href="{{ route('admin.validation.infos_partenaire' , ['id' => $partenariat->id] ) }}">
                                                     en savoir plus <i style="color:blue; font-size:10px"
                                                         class=" fa fa-plus">
                                                     </i>
