@@ -14,9 +14,7 @@
                     @endforeach
                 </ul>
                 @endif
-                <?php
-                $demande_attente = App\Models\Demandepartenariat::first();
-                ?>
+
                 <div class="card ">
                     <div class="card-header">
                         <h3 class="card-title">Edition de la Demande</h3>
