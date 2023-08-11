@@ -10,9 +10,7 @@
                 <div class="card">
                     <div class="card-header">Liste des Partenaires</div>
                     <div class="card-body">
-                        <?php
-                        $partenariat = App\Models\Demandepartenariat::first();
-                        ?>
+
                         <br /><br />
                         <div class="table-responsive">
                             <table id="config-table" class="table">
@@ -26,33 +24,34 @@
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
+                                    @foreach($partenariats as $k => $partenariat)
 
                                     <tr style="font-size:13px">
-                                        <th scope="row"></th>
-                                        <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
-                                        <td>{{$partenariat->libelle_structure}}</td>
-
+                                        <th scope="row">{{$k + 1}}</th>
+                                        <td style="width:160px"> <img
+                                                src="{{asset('/docs/images/lms/'. $demande->where('id' , $partenariat->partenariat_id)->first()->logo)}}"
+                                                class="img-fluid" style="width:20%" alt=""> </td>
+                                        <td>{{$demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure}}
+                                        </td>
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
 
                                                 <a href="{{route('admin.validation.infos_partenaire')}}">
-                                                    en savoir plus <i style="color:blue; font-size:10px" class=" fa fa-plus">
+                                                    en savoir plus <i style="color:blue; font-size:10px"
+                                                        class=" fa fa-plus">
                                                     </i>
                                                 </a>
 
                                             </div>
                                         </td>
                                         <td>
-                                            <a target="_blank" title="Imprimer la Convention" style="padding-left:30px" href="">
+                                            <a target="_blank" title="Imprimer la Convention" style="padding-left:30px"
+                                                href="">
                                                 convention
                                             </a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
-                                    </tr>
-
+                                         @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -67,26 +66,26 @@
 
 @section('js')
 <script type="text/javascript">
-    $("select[name='sous_type_recru']").change(function() {
-        var sous_type_recru = $(this).val();
-        var type_recru = $("input[name='type_recru_id']").val()
-        var token = $("input[name='_token']").val();
-        $.ajax({
-            url: "",
-            method: 'POST',
-            data: {
-                sous_type_recru: sous_type_recru,
-                type_recru: type_recru,
-                _token: token
-            },
-            success: function(data) {
-                $("#content").html('');
-                $("#content").html(data.response);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
+$("select[name='sous_type_recru']").change(function() {
+    var sous_type_recru = $(this).val();
+    var type_recru = $("input[name='type_recru_id']").val()
+    var token = $("input[name='_token']").val();
+    $.ajax({
+        url: "",
+        method: 'POST',
+        data: {
+            sous_type_recru: sous_type_recru,
+            type_recru: type_recru,
+            _token: token
+        },
+        success: function(data) {
+            $("#content").html('');
+            $("#content").html(data.response);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
     });
+});
 </script>
 @endsection

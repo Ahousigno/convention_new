@@ -1,15 +1,7 @@
 @extends('layouts.layout_admin')
 @section('content')
 <!-- Main content -->
-<?php
-$partenaire = App\Models\Validation::first();
-?>
-<?php
-$partenariat = App\Models\Demandepartenariat::first();
-?>
-<?php
-$categorie = App\Models\Categorie::first();
-?>
+
 <section class="content">
     <div class="container-fluid">
         <!-- Info boxes -->
@@ -33,7 +25,7 @@ $categorie = App\Models\Categorie::first();
                                             <h4 class="card-title" style="text-align: center;">Fichiers</h4>
                                         </div>
                                     </div>
-
+                                    @foreach($partenaires as $partenaire)
                                     <div class="card-body">
                                         <div class="text-center">
                                             <div class="user-profile">
@@ -64,6 +56,7 @@ $categorie = App\Models\Categorie::first();
 
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
 

@@ -207,6 +207,14 @@ class AdminController extends Controller
         $partenaire->save();
         return redirect()->route("admin.validation.partenaire")->with("success", "partenariat confirmé!");
     }
+    public function partenaire()
+    {
+        $partenariats  = Validation::where('validated', '1')
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
+        $demande = new Demandepartenariat();
+        return view('admin.validation.partenaire', compact('partenariats', 'demande'));
+    }
 
     public function validation_delete(Request $request)
     {
@@ -219,27 +227,17 @@ class AdminController extends Controller
         return back()->with("success",  "demande supprimée avec succès!");
     }
 
-    public function partenaire()
-    {
-        $partenariats = DB::table('validations')->select('*')
-            ->where('validated', '1')
-            ->orderBy('created_at', 'desc')
-            ->paginate('10');
-        
-        return view('admin.validation.partenaire', compact('partenariats'));
-    }
+
     //information sur les partenariats
 
     public function infos_partenaire()
     {
-        return view('admin.validation.infos_partenaire');
+        $partenaires = DB::table('validations')->select('*');
+        return view('admin.validation.infos_partenaire', compact('partenaires'));
     }
     //information sur les partenariats
 
-    public function infos_partenaire()
-    {
-        return view('admin.validation.infos_partenaire');
-    }
+
 
 
     //categorie
