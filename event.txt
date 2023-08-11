@@ -1,0 +1,49 @@
+changer mot de passe  (ok)
+Acceuil : 
+
+events 
+
+Changement de mot de passe
+
+evenement valide (encours... , a venir , time rebour ) 
+
+evenement caduc ()
+
+->stats()
+
+evenement -> soumis ->
+
+porte -> regional
+
+categorie -> 
+
+nature -> ['atelier' , 'conference' , 'seminaire' , 'colloque']
+
+besoin logistique -> [... , 'sale' ['...' , '...' , '...'] , 'cafete', 'deco' , 'accueil' ]
+besoin mediatique -> [... , 'creation_visuel' , 
+                             ['flyes A5' , 'deplianat' , 'affiches A0 A4 A6' , 'plaquette' , ] ,
+                              'autre' , 'lien visio' , 'retransmition direct (streaming)'  ]
+
+besoin communication -> ["plan_com ["press['organe souhaite' , 'press ecrite' ,
+                         'ligne' , 'audio_visuel' , 'blogueur' , 'maitre_ceremonie'
+                          ]" , ] , "article" , "accueil(hotesse)" , 'secretariat', 'kits (ex:stylo) ]
+
+
+besoin restoration [
+    'interne(voisinage food)' [
+        'pose café' , 
+        'cocktail'
+        ...
+    ] 
+    'externe /prestataire exterieur'
+    ]
+
+Agenda des evenements validé ..  (voir dans le mois actuel , les evenement a venir bien détaillé)
+mail : soumis d'evenement en cours de traitement (accusé de reception)
+        validé (v) (en cour de traitement)
+        press et interne 
+
+checklist (evenement rejeté , validé) /DG
+
+
+

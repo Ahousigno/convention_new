@@ -35,12 +35,13 @@ class AdminController extends Controller
 
     public function edit_attente($id)
     {
-        $partenariat = DemandePartenariat::find($id);
-        return view('admin.partenariat.edit_demande', compact('partenariat'));
+        $demande_attente = DemandePartenariat::find($id);
+        return view('admin.partenariat.edit_demande', compact('demande_attente'));
     }
 
     public function edit_update(Request $request)
     {
+        dd($request->all());
         if($request->can_be_partner == 'NON'){
             $demande = Demandepartenariat::find($request->id);
             $demande->reject = 1 ; 
@@ -185,6 +186,7 @@ class AdminController extends Controller
             'image_convention' => 'required',
         ]);
         $partenaire = new Validation();
+        $partenaire->validated = 1;
         $partenaire->nom_convention = $request->nom_convention;
         $partenaire->date_debut = $request->date_debut;
         $partenaire->date_fin = $request->date_fin;
@@ -217,11 +219,11 @@ class AdminController extends Controller
 
     public function partenaire()
     {
-        $validations = DB::table('validations')->select('*')
-            ->where('validated', '1')
+        $partenariats  = Validation::where('validated', '1')
             ->orderBy('created_at', 'desc')
             ->paginate('10');
-        return view('admin.validation.partenaire', compact('validations'));
+        $demande = new Demandepartenariat();
+        return view('admin.validation.partenaire', compact('partenariats' , 'demande'));
     }
 
 

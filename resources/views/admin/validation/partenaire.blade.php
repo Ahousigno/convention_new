@@ -5,14 +5,10 @@
     <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">Liste des Partenaires</div>
                     <div class="card-body">
-                        <?php
-                        $partenariat = App\Models\Demandepartenariat::first();
-                        ?>
                         <br /><br />
                         <div class="table-responsive">
                             <table id="config-table" class="table">
@@ -26,14 +22,13 @@
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-
+                        @foreach($partenariats as $k => $partenariat)
                                     <tr style="font-size:13px">
-                                        <td></td>
+                                        <td>{{$k + 1}}</td>
                                         <td style="width:160px"> <img
-                                                src="{{asset('/docs/images/lms/'.$partenariat->logo)}}"
+                                                src="{{asset('/docs/images/lms/'. $demande->where('id' , $partenariat->partenariat_id)->first()->logo)}}"
                                                 class="img-fluid" style="width:20%" alt=""> </td>
-                                        <td>{{$partenariat->libelle_structure}}</td>
-
+                                        <td>{{$demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure}}</td>
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
 
@@ -52,7 +47,7 @@
                                             </a>
                                         </td>
                                     </tr>
-
+                        @endforeach
                                     <tr>
                                         <td colspan="7">AUCUNE INFORMATION DISPONIBLE</td>
                                     </tr>

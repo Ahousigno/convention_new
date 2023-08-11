@@ -14,15 +14,14 @@
                     @endforeach
                 </ul>
                 @endif
-                <?php
-                $demande_attente = App\Models\Demandepartenariat::first();
-                ?>
+              
                 <div class="card ">
                     <div class="card-header">
                         <h3 class="card-title">Edition de la Demande</h3>
                     </div>
-                    <form action="{{route('add_update', $demande_attente->id)}}" id="edit_demande" style="font-size:13px" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                        @csrf
+                    <form  action="{{route('add_update', $demande_attente->id)}}" id="edit_demande" style="font-size:13px" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                        
+                    @csrf
                         <div class="card-body">
                             <fieldset class="fieldset">
 

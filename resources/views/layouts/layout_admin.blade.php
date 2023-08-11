@@ -11,15 +11,16 @@
     <title>SYSTEME DE GESTION DES CONVENTIONS DE L'UVCI</title>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{asset('template/admin/plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/template/admin/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{asset('template/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/template/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('template/admin/dist/css/adminlte.css')}}">
+    <link rel="stylesheet" href="{{asset('/template/admin/dist/css/adminlte.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('template/admin/plugins/select2/css/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('/template/admin/plugins/select2/css/select2.css')}}">
+
 
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
@@ -225,17 +226,17 @@
 
         <!-- REQUIRED SCRIPTS -->
         <!-- jQuery -->
-        <script src="{{asset('template/admin/plugins/jquery/jquery.min.js')}}"></script>
+        <script src="{{asset('/template/admin/plugins/jquery/jquery.min.js')}}"></script>
         <!-- Bootstrap -->
-        <script src="{{asset('template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('/template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <!-- overlayScrollbars -->
-        <script src="{{asset('template/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}">
+        <script src="{{asset('/template/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}">
         </script>
         <!-- AdminLTE App -->
-        <script src="{{asset('template/admin/dist/js/adminlte.js')}}"></script>
+        <script src="{{asset('/template/admin/dist/js/adminlte.js')}}"></script>
 
         <!-- OPTIONAL SCRIPTS -->
-        <script src="{{asset('template/admin/dist/js/demo.js')}}"></script>
+        <script src="{{asset('/template/admin/dist/js/demo.js')}}"></script>
 
         <!-- PAGE PLUGINS -->
         <!-- jQuery Mapael -->
@@ -253,12 +254,12 @@
 
         <!-- Scripts DataTable -->
         <link rel="stylesheet" type="text/css"
-            href="{{ asset('datatable/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
+            href="{{ asset('/datatable/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
         <link rel="stylesheet" type="text/css"
-            href="{{ asset('datatable/datatables.net-bs4/css/responsive.dataTables.min.css') }}">
+            href="{{ asset('/datatable/datatables.net-bs4/css/responsive.dataTables.min.css') }}">
         <!-- This is data table -->
-        <script src="{{ asset('datatable/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('datatable/datatables.net-bs4/js/dataTables.responsive.min.js') }}">
+        <script src="{{ asset('/datatable/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('/datatable/datatables.net-bs4/js/dataTables.responsive.min.js') }}">
         </script>
         <script !src="">
         // responsive table
