@@ -7,6 +7,7 @@ use App\Models\Validation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -14,9 +15,9 @@ class ClientController extends Controller
 {
     public function index()
     {
-        // $partenariats = DB::table('demandepartenariats')->select('4')
+        // $partenariats = DB::table('demandepartenariats')->limit('4')
         //     ->orderBy('created_at', 'desc');
-        $partenariats = Demandepartenariat::all();
+        $partenariats = Demandepartenariat::all()->take('6');
         return view('client.accueil', compact('partenariats'));
     }
     public function presentation()
@@ -87,6 +88,9 @@ class ClientController extends Controller
             'fromEmail' => $partenariat->email,
             'fromName' => $partenariat->libelle_structure,
             "subject" => "Demande de partenariat",
+            "demande" => $partenariat->libelle_structure,
+            "createdByName" => Auth::user()['name'],
+            "createdByEmail" => Auth::user()['email'],
         ];
         Mail::send('emails.partenariat', $mail_data, function ($message) use ($mail_data) {
             $message->to($mail_data['recipient'])

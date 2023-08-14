@@ -113,12 +113,12 @@ $categorie = App\Models\Categorie::first();
                                                         </div>
                                                         <div class="row col-lg-12">
                                                             <div class="form-group col-sm-6">
-                                                                <label for="">Charger la convention</label>
+                                                                <label for="">Chargez la convention signée</label>
                                                                 <input type="file" name="file_convention" id=""
                                                                     class="form-control">
                                                             </div>
                                                             <div class="form-group col-sm-6">
-                                                                <label for="">Charger une image</label>
+                                                                <label for="">Chargez une image de la signature</label>
                                                                 <input type="file" name="image_convention" id=""
                                                                     class="form-control">
                                                             </div>

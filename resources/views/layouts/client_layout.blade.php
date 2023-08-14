@@ -118,11 +118,11 @@
                                         aria-hidden="true"></i>
                                     Connecter</a>
                             </li>
-                            <li class="nav-item">
+                            {{--<li class="nav-item">
                                 <a class="nav-link" href="{{route('register')}}" id="nav-link">
-                                    </i> S'inscrire
-                                </a>
-                            </li>
+                            </i> S'inscrire
+                            </a>
+                            </li>--}}
 
                             @endif
                         </ul>

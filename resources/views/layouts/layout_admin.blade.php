@@ -215,8 +215,8 @@
                     <div style="text-align:center" class="copyright-content">
                         <p>Copyright © 2020 -- UVCI tous droits réservés. <i class="fa fa-copyright"
                                 aria-hidden="true"></i>
-                            | (225) 42 22 22 11 | (225) 72 51 30 32 | <a
-                                href="courrier@uvci.edu.ci">courrier@uvci.edu.ci</a></p>
+                            <a href="courrier@uvci.edu.ci">courrier@uvci.edu.ci</a>
+                        </p>
                     </div>
                 </div>
             </footer>

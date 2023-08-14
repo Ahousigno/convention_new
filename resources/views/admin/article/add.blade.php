@@ -20,7 +20,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label>Name</label>
+                                        <label>Nom</label>
                                         <input type="text" class="form-control" name="name" value="">
                                     </div>
                                 </div>
@@ -34,9 +34,8 @@
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label>Article /label><br>
-                                            <textarea class="form-control" id="summary-ckeditor"
-                                                name="article"></textarea>
+                                        <label>Article </label><br>
+                                        <textarea class="form-control" id="summary-ckeditor" name="article"></textarea>
                                     </div>
                                 </div>
 
