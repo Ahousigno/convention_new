@@ -15,9 +15,12 @@
             $currentDate = Carbon::now();
             $monthsUntilEndPartenariat = $currentDate->diffInMonths($date, false);
             if($monthsUntilEndPartenariat <= 3 ){
-                return $monthsUntilEndPartenariat ; 
+                if($monthsUntilEndPartenariat == 0){
+                    $monthsUntilEndPartenariat = "ce";
+                }
+                return  $monthsUntilEndPartenariat ; 
             }
-          return false ;
+          return $monthsUntilEndPartenariat ;
         }
 
         ?>
