@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demandepartenariat;
+use App\Models\Validation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Flash;
@@ -21,8 +22,10 @@ class ClientController extends Controller
 
     public function mediatheque()
     {
-        return view('client.mediatheque');
+        $partenaires = Validation::all(); 
+        return view('client.mediatheque' , compact('partenaires'));
     }
+    
     public function demande_convention()
     {
         return view('client.convention');

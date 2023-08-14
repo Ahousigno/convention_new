@@ -4,6 +4,34 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Info boxes -->
+
+        <?php
+
+        use Carbon\Carbon;
+
+        function dateFinPartenariat($date)
+        {
+            $date = Carbon::parse($date);
+            $currentDate = Carbon::now();
+            $monthsUntilEndPartenariat = $currentDate->diffInMonths($date, false);
+            if($monthsUntilEndPartenariat <= 3 ){
+                return $monthsUntilEndPartenariat ; 
+            }
+          return false ;
+        }
+
+        ?>
+        <div class="alert alert-info">
+        @foreach($partenariats as $k => $partenariat)
+            @if(dateFinPartenariat($partenariat->date_fin)) 
+                    {{
+                    "le partenariat avec la structure " . $demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure . 
+                    " se termine dans " . dateFinPartenariat($partenariat->date_fin) . " mois , date de fin de partenariat : " .  $partenariat->date_fin
+                    }}
+                    <br>
+            @endif
+        @endforeach
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -22,17 +50,17 @@
                                     </tr>
                                 </thead>
                                 <tbody id='content'>
-                        @foreach($partenariats as $k => $partenariat)
-                                    <tr style="font-size:13px">
-                                        <td>{{$k + 1}}</td>
+                                    @foreach($partenariats as $k => $partenariat)
+                                        <th scope="row">{{$k + 1}}</th>
                                         <td style="width:160px"> <img
                                                 src="{{asset('/docs/images/lms/'. $demande->where('id' , $partenariat->partenariat_id)->first()->logo)}}"
                                                 class="img-fluid" style="width:20%" alt=""> </td>
-                                        <td>{{$demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure}}</td>
+                                        <td>{{$demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure}}
+                                        </td>
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
 
-                                                <a href="">
+                                                <a href="{{ route('admin.validation.infos_partenaire' , ['id' => $partenariat->id] ) }}">
                                                     en savoir plus <i style="color:blue; font-size:10px"
                                                         class=" fa fa-plus">
                                                     </i>

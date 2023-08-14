@@ -19,6 +19,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.accueil');
 });
+
+// Route::get('/accueil', function () {
+//     return view('client.accueil');
+// })->middleware(['auth'])->name('client.accueil');
+
+// require __DIR__ . '/auth.php';
+
+
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/accueil', [ClientController::class, 'index'])->name('client.accueil');
+// });
+
+
+
 Route::get('/accueil', [ClientController::class, 'index'])->name('client.accueil');
 Route::get('/presentation', [ClientController::class, 'presentation'])->name('client.presentation');
 Route::get('/partenariat', [ClientController::class, 'demande_partenariat'])->name('client.partenariat');
@@ -53,6 +67,7 @@ Route::get('/demande_convention', [ConventionController::class, 'show_demande_co
 Route::get('/validation', [AdminController::class, 'validation_encours'])->name('admin.validation.encours');
 Route::post('/validation', [AdminController::class, 'validation_store'])->name('validation_partner');
 Route::post('/validation_delete', [AdminController::class, 'validation_delete'])->name('validation_delete');
+Route::get('/information/{id}', [AdminController::class, 'infos_partenaire'])->name('admin.validation.infos_partenaire');
 
 
 //partie partenaire

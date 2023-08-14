@@ -9,5 +9,14 @@ class Validation extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = [
+        
+        'nom_convention',
+        'image_convention',
+        'date_debut',
+        'date_fin',
+        'file_convention',
+        'categorie_id',
+        'partenariat_id',
+    ];
 }

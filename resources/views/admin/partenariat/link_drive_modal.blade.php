@@ -54,7 +54,4 @@
         }
     })
 
-    const formSumbit = function(){
-        form.submit()
-    }
 </script>
