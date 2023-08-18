@@ -22,6 +22,9 @@ class CreateConventionsTable extends Migration
             $table->mediumText('objet')->nullable();
             $table->mediumText('motif_rejet')->nullable();
             $table->string('status')->default('en_attente');
+            $table->string('partenaire_id')->require();
+            // $table->unsignedBigInteger('partenaire_id');
+            // $table->foreign('partenaire_id')->references('id')->on('validations')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -65,13 +65,15 @@
                             <input type="file" name="logo" class="form-control">
                         </div>
                         <div class="form-group col-sm-6" style="margin-top:15px" ;><br>
-                            <label>chargez votre convention (facultatif)</label>
+                            <label>charger votre exemplaire de convention (facultatif)</label>
                             <input type="file" name="exemple_convention" class="form-control">
                         </div>
 
                         <div class="col-xs-12" style="margin-bottom:10px" ;>
                             <div class="checkbox-outer">
-                                <input type="checkbox" name="check" value="OUI"> J'accepte <a href="#"> les termes et
+                                <input type="checkbox" name="check" value="OUI"> J'accepte <a
+                                    href="{{route('client.confidentialite')}}"> les
+                                    termes et
                                     conditions.</a>
                             </div>
                         </div>

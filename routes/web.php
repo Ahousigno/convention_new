@@ -72,7 +72,7 @@ Route::get('/information/{id}', [AdminController::class, 'infos_partenaire'])->n
 
 //partie partenaire
 Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.validation.partenaire');
-
+Route::get('/confidentialite', [ClientController::class, 'confidence'])->name('client.confidentialite');
 
 //partie rejetee
 Route::get('/demande-rejetee', [AdminController::class, 'demande_rejetee'])->name('admin.demande_rejetee');

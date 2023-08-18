@@ -48,6 +48,8 @@
                                         <th>N°</th>
                                         <th>Logo</th>
                                         <th>Structure</th>
+                                        <th>Date de signature</th>
+                                        <th>Date de fin</th>
                                         <th>Action</th>
                                         <th>Imprimer la Convention</th>
                                     </tr>
@@ -55,14 +57,20 @@
                                 <tbody id='content'>
                                     @foreach($partenariats as $k => $partenariat)
                                     <th scope="row">{{$k + 1}}</th>
-                                    <td style="width:160px"> <img src="{{asset('/docs/images/lms/'. $demande->where('id' , $partenariat->partenariat_id)->first()->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
-                                    <td>{{$demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure}}
+                                    <td style="width:140px"> <img src="{{asset('/docs/images/lms/'. $demande->where('id' , $partenariat->partenariat_id)->first()->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
+
+                                    <td style="width:140px">
+                                        {{$demande->where('id' , $partenariat->partenariat_id)->first()->libelle_structure}}
+                                    </td>
+                                    <td style="width:140px"> {{$partenariat->date_debut}}
+                                    </td>
+                                    <td style="width:140px">{{$partenariat->date_fin}}
                                     </td>
                                     <td>
-                                        <div style="display:flex; flex-flow:row nowrap">
+                                        <div style=" display:flex; flex-flow:row nowrap">
 
                                             <a href="{{ route('admin.validation.infos_partenaire' , ['id' => $partenariat->id] ) }}">
-                                                en savoir plus <i style="color:blue; font-size:10px" class=" fa fa-plus">
+                                                infos <i style="color:blue; font-size:10px" class=" fa fa-plus">
                                                 </i>
                                             </a>
 

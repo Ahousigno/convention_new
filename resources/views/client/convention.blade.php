@@ -1,8 +1,13 @@
 @extends('layouts.client_layout')
 @section('contenu')
 
-<?php $nav = "conventions" ?>
+<?php
+
+use App\Models\Convention;
+
+$nav = "conventions" ?>
 <!-- Popular Packages --><br>
+<!-- <?php $convention = Convention::all();  ?> -->
 <section class="popular-packages">
     <div class="container">
         <form action="{{route('save_demande_convention')}}" method="post">
@@ -56,19 +61,25 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Nom de la convention</label>
-                                    <input type="text" name="convention" id="" class="form-control">
-                                    @if ($errors->has('convention'))
-                                    <span class="text-danger fst-italic">
-                                        {{ $errors->first('convention') }}
-                                    </span>
-                                    @endif
+                                    <!-- $conventions = Convention::all(); -->
+                                    <select class="form-control custom-select" required name="partenaire_id">
+                                        <option selected value="" name="partenaire_id">----
+                                            Selectionnez ---</option>
+                                        {{-- @foreach($partenaires as $partenaire)
+                                        <option
+                                            {{ ($partenaire->id == $demande_conventions->partenaire_id) ? 'selected' : '' }}
+                                        value="{{$partenaire->id}}">
+                                        {{$partenaire->nom}}
+                                        </option>
+                                        @endforeach--}}
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="">Objet de la convention</label>
+                                    <label for="">Objet de la demande de cette convention</label>
                                     <textarea name="objet" id="" cols="30" rows="5" class="form-control"></textarea>
                                     @if ($errors->has('objet'))
                                     <span class="text-danger fst-italic">
@@ -90,17 +101,17 @@
     </div>
 </section>
 <style>
-.btn-primary {
-    color: #fff;
-    background-color: rgb(18, 166, 80);
-    border-color: rgb(18, 166, 80);
-}
+    .btn-primary {
+        color: #fff;
+        background-color: rgb(18, 166, 80);
+        border-color: rgb(18, 166, 80);
+    }
 
-.btn-primary:hover {
-    color: #fff;
-    background-color: #92278f;
-    border-color: #92278f;
-}
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #92278f;
+        border-color: #92278f;
+    }
 </style>
 
 @endsection()

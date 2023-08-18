@@ -15,6 +15,6 @@ class Convention extends Model
         'contact',
         'convention',
         'objet',
+        'partenaire_id',
     ];
-
 }

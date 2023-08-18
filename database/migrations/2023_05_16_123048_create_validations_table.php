@@ -17,8 +17,8 @@ class CreateValidationsTable extends Migration
             $table->id();
             $table->string('nom_convention')->require();
             $table->string('categorie_id')->require();
-            $table->string('date_debut', 191)->require();
-            $table->text('date_fin')->require();
+            $table->date('date_debut', 191)->require();
+            $table->date('date_fin')->require();
             $table->string('file_convention', 191)->require();
             $table->string('image_convention', 191)->require();
 

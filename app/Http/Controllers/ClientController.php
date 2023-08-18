@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Convention;
 use App\Models\Demandepartenariat;
 use App\Models\Validation;
 use Illuminate\Support\Facades\Validator;
@@ -24,6 +25,10 @@ class ClientController extends Controller
     {
         return view('client.presentation');
     }
+    public function confidence()
+    {
+        return view('client.confidentialite');
+    }
 
     public function mediatheque()
     {
@@ -32,7 +37,10 @@ class ClientController extends Controller
     }
     public function demande_convention()
     {
-        return view('client.convention');
+
+        $partenaires = Validation::all();
+        $conventions = Convention::all();
+        return view('client.convention', compact('partenaires', 'conventions'));
     }
     public function demande_partenariat(Request $request)
     {
@@ -82,7 +90,7 @@ class ClientController extends Controller
             $partenariat->exemple_convention = $lm_name;
         }
 
-        $recipient = ['georgette.assemian@uvci.edu.ci',  'signo.aviet@uvci.edu.ci', 'dg@uvci.edu.ci']; //Emails des destinataires
+        $recipient = ['georgette.assemian@uvci.edu.ci',  'signo.aviet@uvci.edu.ci', 'dg@uvci.edu.ci', 'julie.kadio@uvci.edu.ci']; //Emails des destinataires
         $mail_data = [
             'recipient' => $recipient, //Emails des autres services et du postulant de l'évènement
             'fromEmail' => $partenariat->email,
