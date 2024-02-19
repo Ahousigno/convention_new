@@ -16,6 +16,13 @@ class CreateDemandepartenariatsTable extends Migration
         Schema::create('demandepartenariats', function (Blueprint $table) {
             $table->id();
             $table->string('nom', 191)->nullable();
+            $table->string('continent', 191)->nullable();
+            $table->string('pays', 191)->nullable();
+            $table->string('ville', 191)->nullable();
+            $table->string('decret', 191)->nullable();
+            $table->string('regime', 191)->nullable();
+            $table->string('site', 191)->nullable();
+            $table->string('status', 191)->nullable();
             $table->string('prenoms', 191)->nullable();
             $table->text('libelle_structure')->nullable();
             $table->string('contact_tel', 191)->nullable();

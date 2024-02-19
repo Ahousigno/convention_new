@@ -16,8 +16,8 @@
                 @foreach($partenariats as $partenariat)
                 <div class="col-sm-3">
                     <div class="media-item">
-                        <img src="{{asset('/docs/images/lms/'. $partenariat->logo)}}" alt="Description de l'image"
-                            width="50%">
+                        <img src="{{asset('/docs/images/lms/'. $partenariat->demande->logo)}}"
+                            alt="Description de l'image" width="50%">
                     </div>
                 </div>
                 @endforeach

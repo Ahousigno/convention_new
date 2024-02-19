@@ -9,7 +9,8 @@
     <title>@yield('title')</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/">
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('client/assets/css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{{asset('client/assets/css/bootstrap.min.css')}}" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}" />
     <meta name="theme-color" content="#7952b3">
@@ -23,12 +24,15 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('client/assets/css/offcanvas.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/1066a12b52.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="//db.onlinewebfonts.com/c/9cb830e3472ffe12fb4943f3ed80832f?family=Segoe+Print" rel="stylesheet" type="text/css" />
+    <link href="//db.onlinewebfonts.com/c/9cb830e3472ffe12fb4943f3ed80832f?family=Segoe+Print" rel="stylesheet"
+        type="text/css" />
     <link rel="stylesheet" type="text/css" href="footer.css">
     <script src="https://kit.fontawesome.com/f200a6bdeb.js" crossorigin="anonymous"></script>
 </head>
@@ -39,34 +43,41 @@
         <div class="bottomnav">
             <nav class="navbar navbar-expand-lg  navbar-dark" aria-label="Main navigation" id="nav-bar">
                 <div class="container-fluid container">
-                    <a class="navbar-brand" href="#"><img class="me-3" src="{{asset('client/assets/img/logo.png')}}" alt="" width="58" height="58"></a>
-                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                    <a class="navbar-brand" href="#"><img class="me-3" src="{{asset('client/assets/img/logo.png')}}"
+                            alt="" width="58" height="58"></a>
+                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+                        aria-label="Toggle navigation">
                         <i class="fa fa-bars fa-2x" style="color: black" aria-hidden="true"></i>
                     </button>
                     <div class="navbar-collapse  justify-content-between offcanvas-collapse" id="navbarsExampleDefault">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "accueil") : ?>active<?php endif; ?>" href="{{route('client.accueil')}}" id="nav-link">
+                                <a class="nav-link <?php if ($nav == "accueil") : ?>active<?php endif; ?>"
+                                    href="{{route('client.accueil')}}" id="nav-link">
                                     <i class="fa fa-home" aria-hidden="true"></i> Accueil
                                 </a>
                             </li>
+                            {{--<li class="nav-item">
+                                <a class="nav-link <?php if ($nav == "presentation") : ?>active<?php endif; ?>" href="{{route('client.presentation')}}"
+                            id="nav-link">
+                            <i class="fa fa-send" aria-hidden="true"></i> Présentation
+                            </a>
+                            </li>--}}
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "presentation") : ?>active<?php endif; ?>" href="{{route('client.presentation')}}" id="nav-link">
-                                    <i class="fa fa-send" aria-hidden="true"></i> Présentation
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "partenariat") : ?>active<?php endif; ?>" href="{{route('client.partenariat')}}" id="nav-link">
+                                <a class="nav-link <?php if ($nav == "partenariat") : ?>active<?php endif; ?>"
+                                    href="{{route('client.partenariat')}}" id="nav-link">
                                     <i class="fa fa-handshake" aria-hidden="true"></i> Partenariat
                                 </a>
                             </li>
+                            {{--<li class="nav-item">
+                                <a class="nav-link <?php if ($nav == "mediatheque") : ?>active<?php endif; ?>"
+                                    href="{{route('client.mediatheque')}}" id="nav-link">
+                            <i class="fa fa-archive" aria-hidden="true"></i> Médiathèque
+                            </a>
+                            </li>--}}
                             <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "mediatheque") : ?>active<?php endif; ?>" href="{{route('client.mediatheque')}}" id="nav-link">
-                                    <i class="fa fa-archive" aria-hidden="true"></i> Médiathèque
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?php if ($nav == "convention") : ?>active<?php endif; ?>" href="{{route('client.convention')}}" id="nav-link">
+                                <a class="nav-link <?php if ($nav == "convention") : ?>active<?php endif; ?>"
+                                    href="{{route('client.convention')}}" id="nav-link">
                                     <i class="fa fa-folder" aria-hidden="true"></i> Convention
                                 </a>
                             </li>
@@ -75,7 +86,8 @@
                             @if (Auth::user())
 
                             <li class="nav-item">
-                                <span class=" dropdown-toggle text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">
+                                <span class=" dropdown-toggle text-decoration-none" href="#" role="button"
+                                    data-bs-toggle="dropdown">
                                     <a><i class="fa fa-user"></i>
                                         {{Auth::user()['name']}}
                                     </a>
@@ -92,7 +104,8 @@
                                             </a>
                                         </li>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
                                             @csrf
                                         </form>
                                     </ul>
@@ -101,7 +114,8 @@
 
                             @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('login')}}" id="nav-link"><i class="fa fa-user" aria-hidden="true"></i>
+                                <a class="nav-link" href="{{route('login')}}" id="nav-link"><i class="fa fa-user"
+                                        aria-hidden="true"></i>
                                     Connecter</a>
                             </li>
                             {{--<li class="nav-item">
@@ -142,13 +156,17 @@
     <!-- Footer -->
 
     <div class="footer-unique">
-        <iframe name="footer-uvci" src="https://www.uvci.edu.ci/footer-uvci/index-fr.php" title="footer-uvci" style="width: 100%; height: 100%; border: none;"></iframe>
+        <iframe name="footer-uvci" src="https://www.uvci.edu.ci/footer-uvci/index-fr.php" title="footer-uvci"
+            style="width: 100%; height: 100%; border: none;"></iframe>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-    <script src="{{asset('client/assets/js/bootstrap.bundle.min.js')}}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="{{asset('client/assets/js/bootstrap.bundle.min.js')}}"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="{{asset('client/assets/js/offcanvas.js')}}"></script>
 
@@ -166,9 +184,9 @@
     </script>
 
     <script type="text/javascript">
-        $(".select2").select2({
-            dropdownParent: $("#exampleModal")
-        });
+    $(".select2").select2({
+        dropdownParent: $("#exampleModal")
+    });
     </script>
 
 
@@ -176,41 +194,41 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <?php if (session('error')) : ?>
-        <script type="text/javascript">
-            Swal.fire({
-                title: 'Oups !',
-                text: '<?php echo session('error'); ?>',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 2500
-                // confirmButtonText: 'Retour'
-            })
-        </script>
+    <script type="text/javascript">
+    Swal.fire({
+        title: 'Oups !',
+        text: '<?php echo session('error'); ?>',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2500
+        // confirmButtonText: 'Retour'
+    })
+    </script>
     <?php endif; ?>
 
     <?php if (session('success') || !empty($success)) : ?>
-        <script type="text/javascript">
-            Swal.fire({
-                title: 'Succès !',
-                text: '<?php echo session('success') ?? $success; ?>',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 4000
-                // confirmButtonText: 'Retour'
-            })
-        </script>
+    <script type="text/javascript">
+    Swal.fire({
+        title: 'Succès !',
+        text: '<?php echo session('success') ?? $success; ?>',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 4000
+        // confirmButtonText: 'Retour'
+    })
+    </script>
     <?php endif; ?>
 
 </body>
 
 <style>
-    ul {
-        padding-left: 0;
-    }
+ul {
+    padding-left: 0;
+}
 
-    h5 {
-        margin-top: 25px;
-    }
+h5 {
+    margin-top: 25px;
+}
 </style>
 
 </html>

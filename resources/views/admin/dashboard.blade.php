@@ -15,7 +15,7 @@
                         <a href="{{route('admin.partenariat.demande_attente')}}"><span class="info-box-text">Demande en
                                 attente</span></a>
                         <span class="info-box-number">
-                            {{--{{$demand_attentes->count()}}--}}
+                            <h4 class="counter">{{ $demande_attente }}</h4>
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -25,14 +25,14 @@
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-warning elevation-1"><i style="font-size:25px" class="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
+                    <span class="info-box-icon bg-warning elevation-1"><i style="font-size:25px"
+                            class="fa fa-cog fa-spin fa-3x fa-fw"></i></span>
 
                     <div class="info-box-content">
-                        <a href="{{route('admin.validation.encours')}}"><span class="info-box-text">Validation de
-                                demande acceptée</span></a>
+                        <a href="{{route('admin.validation.encours')}}"><span class="info-box-text">
+                                Demandes acceptées à valider</span></a>
                         <span class="info-box-number">
-                            {{--{{$demand_attentes->count()}}--}}
-                        </span>
+                            {{ $validation }}
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -48,13 +48,14 @@
 
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-times"
+                            aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
-                        <a href="#"><span class="info-box-text">Demande
-                                patenariats rejétées</span></a>
+                        <a href="{{route('admin.demande_rejetee')}}"><span class="info-box-text">Demande
+                                rejétées</span></a>
                         <span class="info-box-number">
-                            {{--{{$demand_attentes->count()}}--}}
+                            {{ $rejet }}
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -65,13 +66,13 @@
 
             <div class=" col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-secondary elevation-1"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
-
+                    <span class="info-box-icon bg-secondary elevation-1"><i class="fa fa-hashtag"
+                            aria-hidden="true"></i></span>
                     <div class="info-box-content">
                         <a href="{{route('admin.categorie.create')}}"><span class="info-box-text">Categories de
                                 Partenariats</span></a>
                         <span class="info-box-number">
-                            {{--{{$demand_attentes->count()}}--}}
+                            {{ $categorie }}
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -81,13 +82,14 @@
 
             <div class=" col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-handshake-o" aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-handshake-o"
+                            aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
                         <a href="{{route('admin.validation.partenaire')}}"><span class="info-box-text">Nos
                                 partenaires</span></a>
                         <span class="info-box-number">
-                            {{--{{$demand_attentes->count()}}--}}
+                            {{ $partenaire }}
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -97,13 +99,14 @@
 
             <div class=" col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-4" style="cursor : pointer" onclick="window.location.href='#'">
-                    <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-book" aria-hidden="true"></i></span>
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-book"
+                            aria-hidden="true"></i></span>
 
                     <div class="info-box-content">
-                        <a href="{{route('admin.article.base')}}"><span class="info-box-text">Articles de Base
+                        <a href="{{route('show_demande_convention')}}"><span class="info-box-text">Conventions demandées
                             </span></a>
                         <span class="info-box-number">
-                            {{--{{$demand_attentes->count()}}--}}
+                            {{ $convention }}
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -126,8 +129,8 @@
 
 @section('js')
 <script type="text/javascript">
-    $(".fieldset").ready(function() {
-        $('.fieldset').prop('disabled', true);
-    });
+$(".fieldset").ready(function() {
+    $('.fieldset').prop('disabled', true);
+});
 </script>
 @endsection()

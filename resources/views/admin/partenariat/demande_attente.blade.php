@@ -11,6 +11,8 @@
                     <div class="card-header">Liste des demandes en attentes</div>
                     <div class="card-body">
 
+
+
                         <br /><br />
                         <div class="table-responsive">
                             <table id="config-table" class="table">
@@ -19,8 +21,8 @@
                                         <th>N°</th>
                                         <th>Logo</th>
                                         <th>Structure</th>
-                                        <th>Nom et prénoms du point focal</th>
-                                        <th>Nom et prénoms du responsable</th>
+                                        <th>Point focal</th>
+                                        <th>Responsable</th>
                                         <th>Contact</th>
                                         <th>E-Mail</th>
                                         <th>Action</th>
@@ -30,7 +32,9 @@
                                     @forelse($partenariats as $partenariat)
                                     <tr style="font-size:13px">
                                         <th scope="row">{{$loop->index + 1}}</th>
-                                        <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
+                                        <td style="width:160px"> <img
+                                                src="{{asset('/docs/images/lms/'.$partenariat->logo)}}"
+                                                class="img-fluid" style="width:20%" alt=""> </td>
                                         <td>{{$partenariat->libelle_structure}}</td>
                                         <td>{{$partenariat->nom}}</td>
                                         <td>{{$partenariat->prenoms}}</td>
@@ -39,13 +43,19 @@
 
                                         <td>
                                             <div style="display:flex; flex-flow:row nowrap">
-                                                <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}" title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
+                                                <a href="{{route('admin.partenariat.edit_demande', $partenariat->id)}}"
+                                                    title="Editer le profile"><i class="fa fa-edit" aria-hidden="true">
                                                     </i> </a>
 
-                                                <form action="{{route('admin.demande_attentes_delete', $partenariat->id)}}" method="post">
+                                                <form
+                                                    action="{{route('admin.demande_attentes_delete', $partenariat->id)}}"
+                                                    method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value='{{$partenariat->id}}' />
-                                                    <button onclick="return confirm('Voulez-vous vraiment Supprimer de façon définitive ?')" style="margin-left:10px; border:0px" type="submit" name="submit">
+                                                    <button
+                                                        onclick="return confirm('Voulez-vous vraiment Supprimer de façon définitive ?')"
+                                                        style="margin-left:10px; border:0px" type="submit"
+                                                        name="submit">
                                                         <i style="color:red" class=" fa fa-trash">
                                                         </i>
                                                     </button>
@@ -75,26 +85,26 @@
 
 @section('js')
 <script type="text/javascript">
-    $("select[name='sous_type_recru']").change(function() {
-        var sous_type_recru = $(this).val();
-        var type_recru = $("input[name='type_recru_id']").val()
-        var token = $("input[name='_token']").val();
-        $.ajax({
-            url: "",
-            method: 'POST',
-            data: {
-                sous_type_recru: sous_type_recru,
-                type_recru: type_recru,
-                _token: token
-            },
-            success: function(data) {
-                $("#content").html('');
-                $("#content").html(data.response);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
+$("select[name='sous_type_recru']").change(function() {
+    var sous_type_recru = $(this).val();
+    var type_recru = $("input[name='type_recru_id']").val()
+    var token = $("input[name='_token']").val();
+    $.ajax({
+        url: "",
+        method: 'POST',
+        data: {
+            sous_type_recru: sous_type_recru,
+            type_recru: type_recru,
+            _token: token
+        },
+        success: function(data) {
+            $("#content").html('');
+            $("#content").html(data.response);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
     });
+});
 </script>
 @endsection

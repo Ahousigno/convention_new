@@ -11,20 +11,8 @@
     form.addEventListener("submit", function(e) {
         e.preventDefault();
         if (e.target.can_be_partner.value == 'OUI') {
-            document.querySelector('#motif_content').innerHTML = ""
-            document.querySelector('#link_drive_content').innerHTML =
-                `
-                <form action="{{route('lien_drive')}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data"> {!! csrf_field() !!}
-                    <div class="modal-body">
-                          <div class="form-group">
-                              <label for="drive">Envoyer un lien Google docx </label>
-                              <input type="text" name="drive" class="form-control" placeholder="https://docs.google.com/document/d/1JWm..">
-                          </div>
-                      <button  class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                      <button type="submit" onclick="document.querySelector('#edit_demande').submit()" class="btn btn-primary">envoyer</button>
-                    </div>
-                </form>
-            `
+            form.submit()
+
         } else if (e.target.can_be_partner.value == 'NON') {
             document.querySelector('#link_drive_content').innerHTML = "";
             document.querySelector('#motif_content').innerHTML =

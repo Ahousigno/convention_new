@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendDriveMail;
 use App\Mail\SendMotifMail;
-use App\Models\Article;
+use App\Models\Convention;
 use App\Models\Categorie;
+use App\Models\Activite;
 use Laracasts\Flash\Flash;
 use App\Models\Demandepartenariat;
 use App\Models\Validation;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -22,14 +24,21 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $data['demande_attente'] = Demandepartenariat::all();
-
-        return view('admin.dashboard')->with($data);
+        $demande_attente = Demandepartenariat::where('can_be_partner', null)->count();
+        $validation = Demandepartenariat::where('can_be_partner', 'OUI')->whereNotIn('id', function ($query) {
+            $query->select('partenariat_id')->from('validations');
+        })->count();
+        $rejet = Demandepartenariat::where('can_be_partner', 'NON')->count();
+        $categorie = Categorie::count();
+        $partenaire = Validation::where('validated', '1')->count();
+        $convention = Convention::count();
+        return view('admin.dashboard', compact('demande_attente', 'validation', 'rejet', 'categorie', 'partenaire', 'convention'));
     }
 
     public function demande_attente()
     {
-        $partenariats = Demandepartenariat::paginate('10')->where('can_be_partner', null)->sortByDesc('created_at')->all();
+        $partenariats = Demandepartenariat::where('can_be_partner', null)->paginate('10');
+        // dd($partenariats);
         return view('admin.partenariat.demande_attente', compact('partenariats'));
     }
 
@@ -89,7 +98,7 @@ class AdminController extends Controller
 
         Mail::send(new SendDriveMail($request->all()));
 
-        return back()->with("success", "lien envoyé au futur partenaire!");
+        return back()->with("success", " partenaire éligible!");
     }
     public function demande_attente_delete(Request $request)
     {
@@ -109,7 +118,7 @@ class AdminController extends Controller
         $rejetee =  Demandepartenariat::find($request->id);
         $rejetee->can_be_partner = null;
         $rejetee->save();
-        return back()->with("success", "demande de partenariat a bien été supprimé !");
+        return back()->with("success", "demande de partenariat a bien été supprimée !");
     }
 
     public function motif_modal(Request $request)
@@ -169,7 +178,9 @@ class AdminController extends Controller
     public function validation_encours()
     {
         $categories = Categorie::all();
-        $partenaires = Demandepartenariat::where('can_be_partner', 'OUI')
+        $partenaires = Demandepartenariat::where('can_be_partner', 'OUI')->whereNotIn('id', function ($query) {
+            $query->select('partenariat_id')->from('validations');
+        })
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         return view('admin.validation.encours', compact('partenaires', 'categories'));
@@ -186,6 +197,7 @@ class AdminController extends Controller
             'image_convention' => 'required',
         ]);
         $partenaire = new Validation();
+        $partenaire->validated = 1;
         $partenaire->nom_convention = $request->nom_convention;
         $partenaire->date_debut = $request->date_debut;
         $partenaire->date_fin = $request->date_fin;
@@ -206,10 +218,11 @@ class AdminController extends Controller
         $partenaire->categorie_id = $request->categorie_id;
         $partenaire->save();
         return redirect()->route("admin.validation.partenaire")->with("success", "partenariat confirmé!");
+        // return back()->with("success", "partenariat confirmé!");
     }
     public function partenaire()
     {
-        $partenariats  = Validation::where('validated', '0')
+        $partenariats  = Validation::where('validated', '1')
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         $demande = new Demandepartenariat();
@@ -226,8 +239,6 @@ class AdminController extends Controller
         $partenairiat->save();
         return back()->with("success",  "demande supprimée avec succès!");
     }
-
-
     //information sur les partenariats
 
     public function infos_partenaire($id)
@@ -280,7 +291,7 @@ class AdminController extends Controller
             return view('admin.categorie.edit', compact('categorie'))->with("success", "catégorie bien modifié");
         }
         $categorie = Categorie::create($request->all());
-        return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créer");
+        return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créée");
     }
 
     public function categorie_delete(Request $request)
@@ -290,10 +301,7 @@ class AdminController extends Controller
         $categorie->save();
         return back()->with("success",  "categorie supprimée avec succès!");
     }
-
-
     //articles
-
     public function article_base()
     {
         $articles = Article::orderBy('created_at', 'desc')->paginate('10');
@@ -344,5 +352,26 @@ class AdminController extends Controller
         $article = Article::find($request->id);
         Article::destroy($article->id);
         return back()->with("success",  "article supprimé avec succès!");
+    }
+
+
+
+    public function activite(Request $request)
+    {
+        $activite = new Activite();
+        $activite->nom_activite = $request->nom_activite;
+        $activite->debut_activite = $request->debut_activite;
+        $activite->fin_activite = $request->fin_activite;
+        $activite->partenariat_id = $request->partenariat_id;
+        $activite->save();
+        return back()->with("success", "Activite ajoutée!");
+        // return back()->with("success", "partenariat confirmé!");
+    }
+
+    public function activite_delete($id)
+    {
+        $activite = Activite::find($id);
+        $activite->delete();
+        return back()->with("success", "activite supprimée!");
     }
 }

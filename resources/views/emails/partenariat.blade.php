@@ -53,10 +53,10 @@
                                                         </button>
 
                                                     </p>
-                                                    <p>Cordialement !</p> <br>
+                                                    {{--<p>Cordialement !</p> <br>
                                                     <p>Responsable : {{ $createdByName }} <br> Email :
-                                                        {{ $createdByEmail }}
-                                                    </p>
+                                                    {{ $createdByEmail }}
+                                                    </p>--}}
                                                     <p> <span style="font-weight:bold">{{ $fromName }}</span><br>
                                                         Email : {{ $fromEmail }}
                                                     </p>

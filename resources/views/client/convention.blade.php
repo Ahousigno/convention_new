@@ -24,7 +24,7 @@ $nav = "conventions" ?>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="">Nom</label>
+                                    <label for="">Nom et prénoms du demandeur</label>
                                     <input type="text" name="nom" id="" class="form-control">
                                     @if ($errors->has('nom'))
                                     <span class="text-danger fst-italic">
@@ -62,16 +62,13 @@ $nav = "conventions" ?>
                                 <div class="form-group">
                                     <label for="">Nom de la convention</label>
                                     <!-- $conventions = Convention::all(); -->
-                                    <select class="form-control custom-select" required name="partenaire_id">
-                                        <option selected value="" name="partenaire_id">----
-                                            Selectionnez ---</option>
-                                        {{-- @foreach($partenaires as $partenaire)
-                                        <option
-                                            {{ ($partenaire->id == $demande_conventions->partenaire_id) ? 'selected' : '' }}
-                                        value="{{$partenaire->id}}">
-                                        {{$partenaire->nom}}
+                                    <select class="form-control custom-select" required name="convention">
+                                        <option selected value="" name="convention">
+                                            @foreach($conventions as $convention)
+                                        <option value="{{$convention}}">{{$convention}}</option>
+                                        @endforeach
                                         </option>
-                                        @endforeach--}}
+
                                     </select>
                                 </div>
                             </div>
@@ -89,6 +86,14 @@ $nav = "conventions" ?>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xs-12" style="margin-bottom:10px" ;>
+                            <div class="checkbox-outer">
+                                <input type="checkbox" name="check" value="OUI"> J'accepte <a
+                                    href="{{route('client.confidentialite')}}"> les
+                                    termes et
+                                    conditions.</a>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <input type="submit" value="SOUMETTRE" class="btn-primary form-control">
@@ -101,17 +106,17 @@ $nav = "conventions" ?>
     </div>
 </section>
 <style>
-    .btn-primary {
-        color: #fff;
-        background-color: rgb(18, 166, 80);
-        border-color: rgb(18, 166, 80);
-    }
+.btn-primary {
+    color: #fff;
+    background-color: rgb(18, 166, 80);
+    border-color: rgb(18, 166, 80);
+}
 
-    .btn-primary:hover {
-        color: #fff;
-        background-color: #92278f;
-        border-color: #92278f;
-    }
+.btn-primary:hover {
+    color: #fff;
+    background-color: #92278f;
+    border-color: #92278f;
+}
 </style>
 
 @endsection()
