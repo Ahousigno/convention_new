@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SYSTEME DE GESTION DES CONVENTIONS DE L'UVCI</title>
+    <title>PLATEFORME DE GESTION DES CONVENTIONS DE L'UVCI</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('/template/admin/plugins/fontawesome-free/css/all.min.css')}}">
@@ -37,7 +37,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a style="color:#fff" href="" class="nav-link">dashboard</a>
+                    <a style="color:#fff" href="{{route('admin.dashboard')}}" class="nav-link">dashboard</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a style="color:#fff" class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -63,7 +63,7 @@
             <a style="background:#139c40" href="{{route('client.accueil')}}" class="brand-link">
                 <img src="{{ asset('template/admin/dist/img/logo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .3">
-                <span class="brand-text font-weight-light">SGC - UVCI</span>
+                <span class="brand-text font-weight-light">PGC - UVCI</span>
             </a>
 
             <!-- Sidebar -->
@@ -75,7 +75,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">SGRH-UVCI</a>
+                        <a href="{{route('admin.dashboard')}}" class="d-block">PGC-UVCI</a>
                     </div>
                 </div>
 
@@ -89,44 +89,60 @@
                         <li class="nav-item">
                             <a href="{{route('admin.partenariat.demande_attente')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-clock-o"></i>
-                                <p>Demandes en Attentes</p>
+                                <p>Demandes en Attente</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a href="{{route('admin.validation.encours')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
                                 <p>Validation en cours..</p>
                             </a>
                         </li>
+                        <li class="nav-item"><a href="{{route('admin.validation.partenaire')}}" class="nav-link"><i
+                                    style="font-size:13px" class="fa fa-users nav-icon"></i>
+                                <p>Partenaires</p>
+                            </a></li>
                         <li class="nav-item">
                             <a href="{{route('admin.demande_rejetee')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-times"></i>
                                 <p>Demande Réjétée</p>
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('admin.categorie.create')}}" class="nav-link">
-                                <i style="font-size:15px" class="fa fa-hashtag"></i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                        <li class="nav-item"><a href="{{route('admin.validation.partenaire')}}" class="nav-link"><i
-                                    style="font-size:13px" class="fa fa-users nav-icon"></i>
-                                <p>Partenaires</p>
-                            </a></li>
-                        <li class="nav-item"><a href="{{route('admin.article.base')}}" class="nav-link"><i
-                                    style="font-size:13px" class="fa fa-book nav-icon"></i>
-                                <p>Articles de Bases</p>
-                            </a></li>
-
                         <li class="nav-item">
                             <a href="{{route('show_demande_convention')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-hashtag"></i>
                                 <p>Convention</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.categorie.create')}}" class="nav-link">
+                                <i style="font-size:15px" class="fa fa-hashtag"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item"><a href="{{route('admin.article.base')}}" class="nav-link"><i style="font-size:13px" class="fa fa-book nav-icon"></i>
+                                <p>Articles de Bases</p>
+                            </a></li> -->
+
+
+                        <li class="nav-header">gestions des utilisateurs</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i style="font-size:15px" class="fa fa-users nav-icon"></i>
+                                <p>Liste utilisateurs</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i style="font-size:15px" class="fa fa-user nav-icon"></i>
+                                <p>Nouvel utilisateur</p>
+                            </a>
+                        </li>
+
+
+
+
                         {{--@if(Auth::user()->hasrole('superadmin'))
 
                             <li class="nav-header">ADMINISTRATION</li>
@@ -152,15 +168,9 @@
                         @endforeach
                     </ul>
                     </li>
-
-
                     @endif--}}
 
                     <br><br>
-
-
-
-
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -173,7 +183,7 @@
                 <div class="container-fluid">
                     <div class="row mb-1">
                         <div class="col-sm-7">
-                            <h5 class="text-dark">SYSTEME DE GESTION DES CONVENTIONS DE L'UVCI</h5>
+                            <h5 class="text-dark">PLATEFORME DE GESTION DES CONVENTIONS DE L'UVCI</h5>
                         </div><!-- /.col -->
                         <div class="col-sm-5">
                             <ol class="breadcrumb float-sm-right">
@@ -216,8 +226,8 @@
                     <div style="text-align:center" class="copyright-content">
                         <p>Copyright © 2020 -- UVCI tous droits réservés. <i class="fa fa-copyright"
                                 aria-hidden="true"></i>
-                            | (225) 42 22 22 11 | (225) 72 51 30 32 | <a
-                                href="courrier@uvci.edu.ci">courrier@uvci.edu.ci</a></p>
+                            <a href="courrier@uvci.edu.ci">courrier@uvci.edu.ci</a>
+                        </p>
                     </div>
                 </div>
             </footer>

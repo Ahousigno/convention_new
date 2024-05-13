@@ -3,43 +3,22 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConventionController;
+use App\Http\Controllers\RechercheController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-//partie client
-Route::get('/', function () {
-    return view('client.accueil');
-});
-
-// Route::get('/accueil', function () {
-//     return view('client.accueil');
-// })->middleware(['auth'])->name('client.accueil');
-
-// require __DIR__ . '/auth.php';
-
-
-// Route::group(['middleware' => ['auth']], function () {
-//     Route::get('/accueil', [ClientController::class, 'index'])->name('client.accueil');
-// });
-
-
-
-Route::get('/accueil', [ClientController::class, 'index'])->name('client.accueil');
+//client
+Route::get('/', [ClientController::class, 'index'])->name('client.accueil');
 Route::get('/presentation', [ClientController::class, 'presentation'])->name('client.presentation');
 Route::get('/partenariat', [ClientController::class, 'demande_partenariat'])->name('client.partenariat');
 Route::post('/partenariat/store', [ClientController::class, 'store'])->name('partenariat.store');
 Route::get('/mediatheque', [ClientController::class, 'mediatheque'])->name('client.mediatheque');
 Route::get('/convention', [ClientController::class, 'demande_convention'])->name('client.convention');
 Route::get('/tous-les-partenaires', [ClientController::class, 'all_partenariats'])->name('all_partenariats');
+Route::get('/tdynamique', [ClientController::class, 'tres_dynamique'])->name('client.tres_dynamique');
+Route::get('/dynamique', [ClientController::class, 'dynamique'])->name('client.dynamique');
+Route::get('/mdynamique', [ClientController::class, 'moins_dynamique'])->name('client.moins_dynamique');
+Route::get('/infos/{id}', [ClientController::class, 'infos'])->name('client.info');
+Route::get('/rang', [ClientController::class, 'rang'])->name('client.rang');
 
 //partie admin
 Route::get('/admin', function () {
@@ -54,8 +33,11 @@ Route::post('demande/delete', [AdminController::class, 'demande_attente_delete']
 //modal
 Route::post('modal/drive', [AdminController::class, 'drive_modal'])->name('lien_drive');
 Route::post('modal/motif', [AdminController::class, 'motif_modal'])->name('rejet');
-require __DIR__ . '/auth.php';
 
+//activite
+Route::post('activite', [AdminController::class, 'activite'])->name('activite');
+Route::delete('/delete{id}', [AdminController::class, 'activite_delete'])->name('activite-sup');
+require __DIR__ . '/auth.php';
 
 #Convention
 Route::post('/save_demande_conventions', [ConventionController::class, 'save_demande_convention'])->name('save_demande_convention');
@@ -72,7 +54,7 @@ Route::get('/information/{id}', [AdminController::class, 'infos_partenaire'])->n
 
 //partie partenaire
 Route::get('/partenaire', [AdminController::class, 'partenaire'])->name('admin.validation.partenaire');
-
+Route::get('/confidentialite', [ClientController::class, 'confidence'])->name('client.confidentialite');
 
 //partie rejetee
 Route::get('/demande-rejetee', [AdminController::class, 'demande_rejetee'])->name('admin.demande_rejetee');
@@ -95,3 +77,7 @@ Route::post('/article_save', [AdminController::class, 'article_save'])->name('ar
 Route::get('/article_edit/{id}', [AdminController::class, 'article_edit'])->name('admin.article.edit');
 Route::put('/article_edit/{id}', [AdminController::class, 'article_update'])->name('admin.article_update');
 Route::post('/article_delete', [AdminController::class, 'article_delete'])->name('admin.article_delete');
+
+
+//recherche
+Route::post('/search', [RechercheController::class, 'search'])->name('client.recherche');

@@ -19,15 +19,14 @@
                         <h3 class="card-title">Création d'un Article</h3>
                     </div>
 
-                    <form action="{{$add_update}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data"
-                        style="font-size:13px">
+                    <form action="{{$add_update}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data" style="font-size:13px">
                         @csrf
                         <div class="card-body">
                             <div class="row">
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label>Name</label>
+                                        <label>Nom</label>
                                         <input type="text" class="form-control" name="name" value="{{$article->name}}">
                                     </div>
                                 </div>
@@ -35,16 +34,14 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Ordre</label>
-                                        <input type="text" class="form-control" name="ordre"
-                                            value="{{$article->ordre}}">
+                                        <input type="text" class="form-control" name="ordre" value="{{$article->ordre}}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label>Article un Article</label><br>
-                                        <textarea class="form-control" id="summary-ckeditor"
-                                            name="article">{{$article->article}}</textarea>
+                                        <label>Article </label><br>
+                                        <textarea class="form-control" id="summary-ckeditor" name="article">{{$article->article}}</textarea>
                                     </div>
                                 </div>
 

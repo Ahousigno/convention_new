@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendDriveMail;
 use App\Mail\SendMotifMail;
-use App\Models\Article;
+use App\Models\Convention;
 use App\Models\Categorie;
+use App\Models\Activite;
 use Laracasts\Flash\Flash;
 use App\Models\Demandepartenariat;
 use App\Models\Validation;
@@ -23,14 +24,21 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $data['demande_attente'] = Demandepartenariat::all();
-
-        return view('admin.dashboard')->with($data);
+        $demande_attente = Demandepartenariat::where('can_be_partner', null)->count();
+        $validation = Demandepartenariat::where('can_be_partner', 'OUI')->whereNotIn('id', function ($query) {
+            $query->select('partenariat_id')->from('validations');
+        })->count();
+        $rejet = Demandepartenariat::where('can_be_partner', 'NON')->count();
+        $categorie = Categorie::count();
+        $partenaire = Validation::where('validated', '1')->count();
+        $convention = Convention::count();
+        return view('admin.dashboard', compact('demande_attente', 'validation', 'rejet', 'categorie', 'partenaire', 'convention'));
     }
 
     public function demande_attente()
     {
-        $partenariats = Demandepartenariat::paginate('10')->where('can_be_partner', null)->sortByDesc('created_at')->all();
+        $partenariats = Demandepartenariat::where('can_be_partner', null)->paginate('10');
+        // dd($partenariats);
         return view('admin.partenariat.demande_attente', compact('partenariats'));
     }
 
@@ -42,8 +50,8 @@ class AdminController extends Controller
 
     public function edit_update(Request $request)
     {
-        dd($request->all());
-        if($request->can_be_partner == 'NON'){
+
+        if ($request->can_be_partner == 'NON') {
             $demande = Demandepartenariat::find($request->id);
             $demande->reject = 1;
             $demande->can_be_partner = 'NON';
@@ -51,47 +59,55 @@ class AdminController extends Controller
             Mail::send(new SendMotifMail($request->all()));
             $demande->update();
             return back()->with('success', "Demande rejetée");
-            return back()->with('success', "Démande de rejet a bien été transmi");
+            return back()->with('success', "Démande de rejet a bien été transmise");
         }
         $request->validate([
-            'nom' => 'required',
-            'prenoms' => 'required',
-            'email' => 'required',
-            'contact_tel' => 'required',
-            'libelle_structure' => 'required',
+            'nom' => 'nullable',
+            'prenoms' => 'nullable',
+            'email' => 'nullable',
+            'contact_tel' => 'nullable',
+            'libelle_structure' => 'nullable',
             'logo' => 'nullable',
-            'situation_geo' => 'required',
-            'motif' => 'required',
+            'situation_geo' => 'nullable',
+            'motif' => 'nullable',
             'exemple_convention' => 'nullable',
         ]);
         $partenariat = Demandepartenariat::find($request->id);
-        $partenariat->nom = $request->nom;
-        $partenariat->email = $request->email;
-        $partenariat->prenoms = $request->prenoms;
-        $partenariat->contact_tel = $request->contact_tel;
-        $partenariat->drive = $request->drive;
-        $partenariat->can_be_partner = $request->can_be_partner;
-        $partenariat->situation_geo = $request->situation_geo;
-        $partenariat->libelle_structure = $request->libelle_structure;
 
-        if ($request->logo) {
-            $doc_lm = $request->logo;
-            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
-            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
-            $partenariat->logo = $lm_name;
-        }
+        // $partenariat->drive = $request->drive;
+        // $partenariat->can_be_partner = $request->can_be_partner;
+        // $partenariat->continent = $request->continent;
+        // $partenariat->pays = $request->pays;
+        // $partenariat->ville = $request->ville;
+        // $partenariat->decret = $request->decret;
+        // $partenariat->status = $request->status;
+        // $partenariat->site = $request->site;
+        // $partenariat->nom = $request->nom;
+        // $partenariat->email = $request->email;
+        // $partenariat->prenoms = $request->prenoms;
+        // $partenariat->contact_tel = $request->contact_tel;
+        // $partenariat->motif = $request->motif;
+        // $partenariat->situation_geo = $request->situation_geo;
+        // $partenariat->libelle_structure = $request->libelle_structure;
 
-        if ($request->exemple_convention) {
-            $doc_lm = $request->exemple_convention;
-            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
-            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
-            $partenariat->exemple_convention = $lm_name;
-        }
+        // if ($request->logo) {
+        //     $doc_lm = $request->logo;
+        //     $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+        //     $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+        //     $partenariat->logo = $lm_name;
+        // }
+
+        // if ($request->exemple_convention) {
+        //     $doc_lm = $request->exemple_convention;
+        //     $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+        //     $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+        //     $partenariat->exemple_convention = $lm_name;
+        // }
         $partenariat->update();
-
+        // dd($request->all());
         Mail::send(new SendDriveMail($request->all()));
 
-        return back()->with("success", "lien envoyé au futur partenaire!");
+        return back()->with("success", " partenaire éligible!");
     }
     public function demande_attente_delete(Request $request)
     {
@@ -111,7 +127,7 @@ class AdminController extends Controller
         $rejetee =  Demandepartenariat::find($request->id);
         $rejetee->can_be_partner = null;
         $rejetee->save();
-        return back()->with("success", "demande de partenariat a bien été supprimé !");
+        return back()->with("success", "demande de partenariat a bien été supprimée !");
     }
 
     public function motif_modal(Request $request)
@@ -171,7 +187,9 @@ class AdminController extends Controller
     public function validation_encours()
     {
         $categories = Categorie::all();
-        $partenaires = Demandepartenariat::where('can_be_partner', 'OUI')
+        $partenaires = Demandepartenariat::where('can_be_partner', 'OUI')->whereNotIn('id', function ($query) {
+            $query->select('partenariat_id')->from('validations');
+        })
             ->orderBy('created_at', 'desc')
             ->paginate('10');
         return view('admin.validation.encours', compact('partenaires', 'categories'));
@@ -183,6 +201,7 @@ class AdminController extends Controller
             'nom_convention' => 'required',
             'categorie_id' => 'required',
             'date_debut' => 'required|date',
+            'duree' => 'required',
             'date_fin' => 'required|date',
             'file_convention' => 'required',
             'image_convention' => 'required',
@@ -191,6 +210,7 @@ class AdminController extends Controller
         $partenaire->validated = 1;
         $partenaire->nom_convention = $request->nom_convention;
         $partenaire->date_debut = $request->date_debut;
+        $partenaire->duree = $request->duree;
         $partenaire->date_fin = $request->date_fin;
         if ($request->file_convention) {
             $doc_lm = $request->file_convention;
@@ -208,7 +228,8 @@ class AdminController extends Controller
         $partenaire->partenariat_id = $request->partenariat_id;
         $partenaire->categorie_id = $request->categorie_id;
         $partenaire->save();
-        return redirect()->route("admin.validation.partenaire")->wit("success", "partenariat confirmé!");
+        return redirect()->route("admin.validation.partenaire")->with("success", "partenariat confirmé!");
+        // return back()->with("success", "partenariat confirmé!");
     }
     public function partenaire()
     {
@@ -232,8 +253,6 @@ class AdminController extends Controller
         $partenairiat->save();
         return back()->with("success",  "demande supprimée avec succès!");
     }
-
-
     //information sur les partenariats
 
     public function infos_partenaire($id)
@@ -241,13 +260,8 @@ class AdminController extends Controller
         $partenaire = Validation::where('id', $id)->first();
         $demande = new Demandepartenariat();
         $categorie = new Categorie();
-        return view('admin.validation.infos_partenaire', compact('partenaire' , 'demande' , 'categorie'));
+        return view('admin.validation.infos_partenaire', compact('partenaire', 'demande', 'categorie'));
     }
-    //information sur les partenariats
-
-
-
-
     //categorie
 
     public function categorie()
@@ -291,7 +305,7 @@ class AdminController extends Controller
             return view('admin.categorie.edit', compact('categorie'))->with("success", "catégorie bien modifié");
         }
         $categorie = Categorie::create($request->all());
-        return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créer");
+        return redirect(route('admin.categorie.create'))->with("success", "Categorie bien créée");
     }
 
     public function categorie_delete(Request $request)
@@ -301,10 +315,7 @@ class AdminController extends Controller
         $categorie->save();
         return back()->with("success",  "categorie supprimée avec succès!");
     }
-
-
     //articles
-
     public function article_base()
     {
         $articles = Article::orderBy('created_at', 'desc')->paginate('10');
@@ -355,5 +366,26 @@ class AdminController extends Controller
         $article = Article::find($request->id);
         Article::destroy($article->id);
         return back()->with("success",  "article supprimé avec succès!");
+    }
+
+
+
+    public function activite(Request $request)
+    {
+        $activite = new Activite();
+        $activite->nom_activite = $request->nom_activite;
+        $activite->debut_activite = $request->debut_activite;
+        $activite->fin_activite = $request->fin_activite;
+        $activite->partenariat_id = $request->partenariat_id;
+        $activite->save();
+        return back()->with("success", "Activite ajoutée!");
+        // return back()->with("success", "partenariat confirmé!");
+    }
+
+    public function activite_delete($id)
+    {
+        $activite = Activite::find($id);
+        $activite->delete();
+        return back()->with("success", "activite supprimée!");
     }
 }

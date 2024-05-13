@@ -5,8 +5,9 @@
 @endsection
 
 @section("contenu")
-<?php 
-Use Carbon\Carbon;
+<?php
+
+use Carbon\Carbon;
 
 $nav = "mediatheque" ?>
 
@@ -17,7 +18,8 @@ $nav = "mediatheque" ?>
             @foreach($partenaires as $partenaire)
             <div class="col-sm-3">
                 <div class="media-item">
-                    <img src="{{asset('/docs/images/lms/'. $partenaire->image_convention)}}" alt="Description de l'image 1">
+                    <img src="{{asset('/docs/images/lms/'. $partenaire->image_convention)}}"
+                        alt="Description de l'image 1">
                     <div class="media-details">
                         <p>Convention: {{$partenaire->nom_convention}}</p>Date de signature :
                         {{ Carbon::parse($partenaire->date_debut)->format('d F Y') }}</p>
@@ -30,20 +32,20 @@ $nav = "mediatheque" ?>
     </div>
 </div>
 <style>
-    .media-item {
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+.media-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-    .media-item img {
-        width: 100%;
-        height: auto;
-    }
+.media-item img {
+    width: 100%;
+    height: auto;
+}
 
-    .media-details {
-        margin-top: 10px;
-    }
+.media-details {
+    margin-top: 10px;
+}
 </style>
 @endsection()

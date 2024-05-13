@@ -67,7 +67,7 @@ ul{
 .our-webcoderskull #partenaire{
     float:left;
     width:100%;
-    background:#fff;
+    /* background:#fff; */
     padding:2px 2px;
     text-align:center;
     box-shadow: inset 0 0 2em rgb(18, 166, 80);

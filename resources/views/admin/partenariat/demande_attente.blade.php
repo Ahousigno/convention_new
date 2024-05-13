@@ -11,6 +11,8 @@
                     <div class="card-header">Liste des demandes en attentes</div>
                     <div class="card-body">
 
+
+
                         <br /><br />
                         <div class="table-responsive">
                             <table id="config-table" class="table">
@@ -19,8 +21,8 @@
                                         <th>N°</th>
                                         <th>Logo</th>
                                         <th>Structure</th>
-                                        <th>Nom et prénoms du point focal</th>
-                                        <th>Nom et prénoms du responsable</th>
+                                        <th>Point focal</th>
+                                        <th>Responsable</th>
                                         <th>Contact</th>
                                         <th>E-Mail</th>
                                         <th>Action</th>
@@ -28,7 +30,7 @@
                                 </thead>
                                 <tbody id='content'>
                                     @forelse($partenariats as $partenariat)
-                                    <tr style="font-size:13px">
+                                    <tr style="font-size:13px; font-size:1.3rem">
                                         <th scope="row">{{$loop->index + 1}}</th>
                                         <td style="width:160px"> <img src="{{asset('/docs/images/lms/'.$partenariat->logo)}}" class="img-fluid" style="width:20%" alt=""> </td>
                                         <td>{{$partenariat->libelle_structure}}</td>

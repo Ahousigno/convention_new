@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Categorie extends Model
 {
-    use HasFactory ;
-
-
+    use HasFactory;
     protected $fillable = [
         'libelle_categorie',
     ];
+
+    public function validation()
+    {
+        return $this->hasOne(Validation::class);
+    }
 }
