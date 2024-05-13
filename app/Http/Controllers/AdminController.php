@@ -50,6 +50,7 @@ class AdminController extends Controller
 
     public function edit_update(Request $request)
     {
+
         if ($request->can_be_partner == 'NON') {
             $demande = Demandepartenariat::find($request->id);
             $demande->reject = 1;
@@ -58,44 +59,52 @@ class AdminController extends Controller
             Mail::send(new SendMotifMail($request->all()));
             $demande->update();
             return back()->with('success', "Demande rejetée");
-            return back()->with('success', "Démande de rejet a bien été transmi");
+            return back()->with('success', "Démande de rejet a bien été transmise");
         }
         $request->validate([
-            'nom' => 'required',
-            'prenoms' => 'required',
-            'email' => 'required',
-            'contact_tel' => 'required',
-            'libelle_structure' => 'required',
+            'nom' => 'nullable',
+            'prenoms' => 'nullable',
+            'email' => 'nullable',
+            'contact_tel' => 'nullable',
+            'libelle_structure' => 'nullable',
             'logo' => 'nullable',
-            'situation_geo' => 'required',
-            'motif' => 'required',
+            'situation_geo' => 'nullable',
+            'motif' => 'nullable',
             'exemple_convention' => 'nullable',
         ]);
         $partenariat = Demandepartenariat::find($request->id);
-        $partenariat->nom = $request->nom;
-        $partenariat->email = $request->email;
-        $partenariat->prenoms = $request->prenoms;
-        $partenariat->contact_tel = $request->contact_tel;
-        $partenariat->drive = $request->drive;
-        $partenariat->can_be_partner = $request->can_be_partner;
-        $partenariat->situation_geo = $request->situation_geo;
-        $partenariat->libelle_structure = $request->libelle_structure;
 
-        if ($request->logo) {
-            $doc_lm = $request->logo;
-            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
-            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
-            $partenariat->logo = $lm_name;
-        }
+        // $partenariat->drive = $request->drive;
+        // $partenariat->can_be_partner = $request->can_be_partner;
+        // $partenariat->continent = $request->continent;
+        // $partenariat->pays = $request->pays;
+        // $partenariat->ville = $request->ville;
+        // $partenariat->decret = $request->decret;
+        // $partenariat->status = $request->status;
+        // $partenariat->site = $request->site;
+        // $partenariat->nom = $request->nom;
+        // $partenariat->email = $request->email;
+        // $partenariat->prenoms = $request->prenoms;
+        // $partenariat->contact_tel = $request->contact_tel;
+        // $partenariat->motif = $request->motif;
+        // $partenariat->situation_geo = $request->situation_geo;
+        // $partenariat->libelle_structure = $request->libelle_structure;
 
-        if ($request->exemple_convention) {
-            $doc_lm = $request->exemple_convention;
-            $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
-            $doc_lm->move(public_path("docs/images/lms"), $lm_name);
-            $partenariat->exemple_convention = $lm_name;
-        }
+        // if ($request->logo) {
+        //     $doc_lm = $request->logo;
+        //     $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+        //     $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+        //     $partenariat->logo = $lm_name;
+        // }
+
+        // if ($request->exemple_convention) {
+        //     $doc_lm = $request->exemple_convention;
+        //     $lm_name = time() . '.' . $doc_lm->getClientOriginalName();
+        //     $doc_lm->move(public_path("docs/images/lms"), $lm_name);
+        //     $partenariat->exemple_convention = $lm_name;
+        // }
         $partenariat->update();
-
+        // dd($request->all());
         Mail::send(new SendDriveMail($request->all()));
 
         return back()->with("success", " partenaire éligible!");
@@ -192,6 +201,7 @@ class AdminController extends Controller
             'nom_convention' => 'required',
             'categorie_id' => 'required',
             'date_debut' => 'required|date',
+            'duree' => 'required',
             'date_fin' => 'required|date',
             'file_convention' => 'required',
             'image_convention' => 'required',
@@ -200,6 +210,7 @@ class AdminController extends Controller
         $partenaire->validated = 1;
         $partenaire->nom_convention = $request->nom_convention;
         $partenaire->date_debut = $request->date_debut;
+        $partenaire->duree = $request->duree;
         $partenaire->date_fin = $request->date_fin;
         if ($request->file_convention) {
             $doc_lm = $request->file_convention;

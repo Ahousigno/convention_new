@@ -66,7 +66,7 @@
                             <li class="nav-item">
                                 <a class="nav-link <?php if ($nav == "partenariat") : ?>active<?php endif; ?>"
                                     href="{{route('client.partenariat')}}" id="nav-link">
-                                    <i class="fa fa-handshake" aria-hidden="true"></i> Partenariat
+                                    <i class="fa fa-handshake" aria-hidden="true"></i> Demande de Partenariat
                                 </a>
                             </li>
                             {{--<li class="nav-item">
@@ -78,7 +78,7 @@
                             <li class="nav-item">
                                 <a class="nav-link <?php if ($nav == "convention") : ?>active<?php endif; ?>"
                                     href="{{route('client.convention')}}" id="nav-link">
-                                    <i class="fa fa-folder" aria-hidden="true"></i> Convention
+                                    <i class="fa fa-folder" aria-hidden="true"></i> Demande de Convention
                                 </a>
                             </li>
                         </ul>

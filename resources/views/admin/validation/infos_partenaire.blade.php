@@ -56,7 +56,7 @@
                                                         </div>
 
                                                         <div class="mt-3">
-                                                            <h6 class="mb-1" style="font-weight:bold;">Regime de
+                                                            <h6 class="mb-1" style="font-weight:bold;">Registre de
                                                                 commerce:</h6>
                                                             <br>
                                                             <p class="d-inline-block pl-3"> <a href="{{asset('/docs/images/lms/'.$partenaire->regime)}}" target="_blank"><span>regime</span>

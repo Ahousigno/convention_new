@@ -91,7 +91,6 @@
                                 <p>Demandes en Attente</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a href="{{route('admin.validation.encours')}}" class="nav-link">
                                 <i style="font-size:15px" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
@@ -124,6 +123,23 @@
                         <!-- <li class="nav-item"><a href="{{route('admin.article.base')}}" class="nav-link"><i style="font-size:13px" class="fa fa-book nav-icon"></i>
                                 <p>Articles de Bases</p>
                             </a></li> -->
+
+
+                        <li class="nav-header">gestions des utilisateurs</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i style="font-size:15px" class="fa fa-users nav-icon"></i>
+                                <p>Liste utilisateurs</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i style="font-size:15px" class="fa fa-user nav-icon"></i>
+                                <p>Nouvel utilisateur</p>
+                            </a>
+                        </li>
+
+
 
 
                         {{--@if(Auth::user()->hasrole('superadmin'))

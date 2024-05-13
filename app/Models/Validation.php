@@ -11,15 +11,8 @@ class Validation extends Model
 
     protected $guarded = [
 
-        'nom_convention',
-        'image_convention',
-        'date_debut',
-        'date_fin',
-        'file_convention',
-        'categorie_id',
-        'partenariat_id',
+        'id',
     ];
-
 
     public function activites()
     {
@@ -28,5 +21,9 @@ class Validation extends Model
     public function demande()
     {
         return $this->belongsTo(Demandepartenariat::class, 'partenariat_id', 'id');
+    }
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class, 'categorie_id', 'id');
     }
 }

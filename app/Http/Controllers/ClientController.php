@@ -169,4 +169,14 @@ class ClientController extends Controller
         $categorie = new Categorie();
         return view('client.info', compact('partenaireWithMoyenActivite', 'demande', 'categorie'));
     }
+
+
+    public function rang()
+    {
+
+        $partenaires = Validation::all();
+        // $activite = Activite::count();
+
+        return view('client.rang', compact('partenaires'));
+    }
 }

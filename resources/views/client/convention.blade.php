@@ -14,7 +14,7 @@ $nav = "conventions" ?>
             @csrf
             <div class="panel" style="box-shadow: inset 0 0 0.7em blue; margin-top: 15px">
                 <div class="panel-header" style="margin: 20px 0 45px 0">
-                    <h4 class="text-center pt-5">Voulez vous faire une demande de convention? Renseignez le formulaire
+                    <h4 class="text-center pt-5">Voulez vous avoir accès à une convention? Renseignez le formulaire
                         ci-dessous
                     </h4>
                 </div>
@@ -88,8 +88,7 @@ $nav = "conventions" ?>
                         </div>
                         <div class="col-xs-12" style="margin-bottom:10px" ;>
                             <div class="checkbox-outer">
-                                <input type="checkbox" name="check" value="OUI"> J'accepte <a
-                                    href="{{route('client.confidentialite')}}"> les
+                                <input type="checkbox" name="check" value="OUI"> J'accepte <a href="{{route('client.confidentialite')}}"> les
                                     termes et
                                     conditions.</a>
                             </div>
@@ -106,17 +105,17 @@ $nav = "conventions" ?>
     </div>
 </section>
 <style>
-.btn-primary {
-    color: #fff;
-    background-color: rgb(18, 166, 80);
-    border-color: rgb(18, 166, 80);
-}
+    .btn-primary {
+        color: #fff;
+        background-color: rgb(18, 166, 80);
+        border-color: rgb(18, 166, 80);
+    }
 
-.btn-primary:hover {
-    color: #fff;
-    background-color: #92278f;
-    border-color: #92278f;
-}
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #92278f;
+        border-color: #92278f;
+    }
 </style>
 
 @endsection()

@@ -301,7 +301,7 @@
                             <input type="text" name="libelle_structure" required class="form-control">
                         </div>
                         <div align="center" class="form-group col-sm-4" style="margin-top:30px" ;>
-                            <label>status</label>
+                            <label>statut</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="status" id="status1">
                                 <label class="form-check-label" for="status1">
@@ -316,11 +316,11 @@
                             </div>
                         </div>
                         <div align="center" class="form-group col-sm-4" style="margin-top:30px" ;>
-                            <label>decret de création</label>
+                            <label>décret de création</label>
                             <input type="text" name="decret" required class="form-control">
                         </div>
                         <div align="center" class="form-group col-sm-4" style="margin-top:30px" ;>
-                            <label>regime de commerce</label>
+                            <label>registre de commerce</label>
                             <input type="file" name="regime" required class="form-control">
                         </div>
                         <div align="center" class="form-group col-sm-4" style="margin-top:30px" ;>

@@ -18,6 +18,7 @@ Route::get('/tdynamique', [ClientController::class, 'tres_dynamique'])->name('cl
 Route::get('/dynamique', [ClientController::class, 'dynamique'])->name('client.dynamique');
 Route::get('/mdynamique', [ClientController::class, 'moins_dynamique'])->name('client.moins_dynamique');
 Route::get('/infos/{id}', [ClientController::class, 'infos'])->name('client.info');
+Route::get('/rang', [ClientController::class, 'rang'])->name('client.rang');
 
 //partie admin
 Route::get('/admin', function () {
